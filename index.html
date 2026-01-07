@@ -12,44 +12,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://robinmatelot.fr">
     
-    <!-- Configuration Tailwind (Avant le script pour garantir l'application) -->
-    <script>
-        window.tailwind = {
-            config: {
-                theme: {
-                    extend: {
-                        colors: {
-                            brand: {
-                                900: '#0f172a', // Slate 900 (Fond sombre profond)
-                                800: '#1e293b', // Slate 800 (Cartes)
-                                700: '#334155', // Slate 700 (Bordures)
-                                accent: '#facc15', // Yellow 400 (Le jaune vif original)
-                                accentHover: '#eab308', // Yellow 500 (Pour les survols)
-                            }
-                        },
-                        fontFamily: {
-                            sans: ['Inter', 'system-ui', 'sans-serif'],
-                        },
-                        animation: {
-                            'fade-in': 'fadeIn 0.6s ease-out forwards',
-                            'slide-up': 'slideUp 0.6s ease-out forwards',
-                        },
-                        keyframes: {
-                            fadeIn: {
-                                '0%': { opacity: '0' },
-                                '100%': { opacity: '1' },
-                            },
-                            slideUp: {
-                                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                                '100%': { opacity: '1', transform: 'translateY(0)' },
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (CDN direct avec classes natives pour éviter tout bug de config) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts Optimisé -->
@@ -82,7 +45,7 @@
         /* Styles critiques et Reset */
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #0f172a; 
+            background-color: #0f172a; /* Fallback solide immédiat */
             color: #e2e8f0;
             overflow-x: hidden; 
         }
@@ -97,7 +60,7 @@
             display: block; 
         }
 
-        /* Accessibilité : Focus visible */
+        /* Accessibilité : Focus visible en jaune */
         *:focus-visible {
             outline: 2px solid #facc15;
             outline-offset: 2px;
@@ -105,51 +68,55 @@
 
         /* Utilitaires d'animation */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
     </style>
 </head>
-<body class="bg-brand-900 text-slate-200 antialiased selection:bg-brand-accent selection:text-brand-900">
+<body class="bg-slate-900 text-slate-200 antialiased selection:bg-yellow-400 selection:text-slate-900">
 
     <!-- Navigation (Skip Link pour a11y) -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-accent text-brand-900 px-4 py-2 rounded font-bold z-50">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-yellow-400 text-slate-900 px-4 py-2 rounded font-bold z-50">
         Aller au contenu principal
     </a>
 
-    <!-- Navbar: Suppression de la transparence (bg-brand-900 solide) -->
-    <nav class="fixed w-full z-50 bg-brand-900 shadow-lg py-4 border-b border-brand-800" aria-label="Menu principal">
+    <!-- Navbar: Fond 100% opaque Slate-900 -->
+    <nav class="fixed w-full z-50 bg-slate-900 shadow-lg py-4 border-b border-slate-800" aria-label="Menu principal">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <!-- Logo -->
             <a href="#" onclick="navigateTo('accueil'); return false;" class="text-xl font-bold text-white flex items-center gap-2 hover:opacity-80 transition-opacity p-1" aria-label="Retour à l'accueil">
-                <span class="text-brand-accent">
+                <span class="text-yellow-400">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
                 </span>
-                <span class="tracking-tight">Robin<span class="text-brand-accent">Matelot</span></span>
+                <span class="tracking-tight">Robin<span class="text-yellow-400">Matelot</span></span>
             </a>
 
             <!-- Desktop Menu -->
             <ul class="hidden md:flex gap-8 items-center list-none m-0 p-0">
-                <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors py-2" aria-current="page" data-target="accueil">Accueil</a></li>
-                <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors py-2" data-target="expertise">Expertise</a></li>
-                <li><a href="#projets" onclick="navigateTo('projets'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors py-2" data-target="projets">Projets</a></li>
+                <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" aria-current="page" data-target="accueil">Accueil</a></li>
+                <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" data-target="expertise">Expertise</a></li>
+                <li><a href="#projets" onclick="navigateTo('projets'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" data-target="projets">Projets</a></li>
                 <li>
-                    <a href="#contact" onclick="navigateTo('contact'); return false;" class="px-6 py-2.5 bg-brand-accent text-brand-900 font-bold rounded-full text-sm hover:bg-brand-accentHover transition-colors shadow-lg transform active:scale-95" data-target="contact">
+                    <a href="#contact" onclick="navigateTo('contact'); return false;" class="px-6 py-2.5 bg-yellow-400 text-slate-900 font-bold rounded-full text-sm hover:bg-yellow-500 transition-colors shadow-lg transform active:scale-95" data-target="contact">
                         Me contacter
                     </a>
                 </li>
             </ul>
 
             <!-- Mobile Toggle Button (48px target size) -->
-            <button id="mobile-menu-btn" class="md:hidden text-white p-3 -mr-3 rounded-lg hover:bg-brand-800 focus:ring-2 focus:ring-brand-accent" aria-label="Ouvrir le menu" aria-expanded="false">
+            <button id="mobile-menu-btn" class="md:hidden text-white p-3 -mr-3 rounded-lg hover:bg-slate-800 focus:ring-2 focus:ring-yellow-400" aria-label="Ouvrir le menu" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
             </button>
         </div>
 
-        <!-- Mobile Menu Overlay: Fond solide opaque (bg-brand-900) -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-900 border-b border-brand-800 shadow-2xl" role="region" aria-label="Menu mobile">
+        <!-- Mobile Menu Overlay: Fond 100% opaque et solide -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-2xl" role="region" aria-label="Menu mobile">
             <ul class="flex flex-col p-4 gap-2 list-none m-0">
-                <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-brand-800 font-medium active:bg-brand-800 border-b border-brand-800/50">Accueil</a></li>
-                <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-brand-800 font-medium active:bg-brand-800 border-b border-brand-800/50">Expertise</a></li>
-                <li><a href="#projets" onclick="navigateTo('projets'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-brand-800 font-medium active:bg-brand-800 border-b border-brand-800/50">Projets</a></li>
-                <li><a href="#contact" onclick="navigateTo('contact'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-brand-accent font-bold hover:bg-brand-800 active:bg-brand-800">Me contacter</a></li>
+                <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link-mobile block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-slate-800 font-medium active:bg-slate-800 border-b border-slate-800/50" data-target="accueil">Accueil</a></li>
+                <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="nav-link-mobile block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-slate-800 font-medium active:bg-slate-800 border-b border-slate-800/50" data-target="expertise">Expertise</a></li>
+                <li><a href="#projets" onclick="navigateTo('projets'); return false;" class="nav-link-mobile block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-slate-800 font-medium active:bg-slate-800 border-b border-slate-800/50" data-target="projets">Projets</a></li>
+                <li><a href="#contact" onclick="navigateTo('contact'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-yellow-400 font-bold hover:bg-slate-800 active:bg-slate-800">Me contacter</a></li>
             </ul>
         </div>
     </nav>
@@ -161,18 +128,18 @@
         <div id="accueil" class="page-section active" role="tabpanel" aria-labelledby="tab-accueil">
             <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
                 <!-- Décoration de fond -->
-                <div class="absolute inset-0 bg-gradient-to-b from-brand-900 via-brand-800 to-brand-900 z-0"></div>
-                <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-accent/5 rounded-full blur-3xl"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 z-0"></div>
+                <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-400/5 rounded-full blur-3xl"></div>
                 
                 <div class="container mx-auto px-6 relative z-10 text-center pt-10">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-800 border border-brand-700 rounded-full text-brand-accent text-sm font-semibold mb-8 shadow-sm animate-fade-in">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 border border-slate-700 rounded-full text-yellow-400 text-sm font-semibold mb-8 shadow-sm animate-fade-in">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                         Disponible à Caen & en Normandie
                     </div>
                     
                     <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight animate-slide-up">
                         Développeur Web & <br />
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-200">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">
                             Logiciel Freelance
                         </span>
                     </h1>
@@ -182,11 +149,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.3s;">
-                        <button onclick="navigateTo('contact')" class="group px-8 py-4 bg-brand-accent text-brand-900 font-bold rounded-xl hover:bg-brand-accentHover transition-all shadow-lg shadow-brand-accent/10 flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                        <button onclick="navigateTo('contact')" class="group px-8 py-4 bg-yellow-400 text-slate-900 font-bold rounded-xl hover:bg-yellow-500 transition-all shadow-lg shadow-yellow-400/10 flex items-center justify-center gap-2 transform hover:-translate-y-1">
                             Discuter de votre projet 
                             <svg class="transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         </button>
-                        <button onclick="navigateTo('projets')" class="px-8 py-4 bg-transparent border border-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 hover:border-brand-accent transition-colors">
+                        <button onclick="navigateTo('projets')" class="px-8 py-4 bg-transparent border border-slate-700 text-white font-semibold rounded-xl hover:bg-slate-800 hover:border-yellow-400 transition-colors">
                             Voir mon portfolio
                         </button>
                     </div>
@@ -194,17 +161,17 @@
             </section>
 
             <!-- Section Valeurs (Réassurance) -->
-            <section class="py-24 bg-brand-800 border-t border-brand-700">
+            <section class="py-24 bg-slate-800 border-t border-slate-700">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16">
-                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Valeurs Ajoutées</span>
+                        <span class="text-yellow-400 font-bold tracking-widest text-xs uppercase mb-3 block">Valeurs Ajoutées</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-white">Pourquoi choisir un Freelance ?</h2>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
                         <!-- Carte 1 -->
                         <article class="flex flex-col items-center text-center">
-                            <div class="bg-brand-900 p-4 rounded-2xl text-brand-accent mb-6 border border-brand-700 shadow-md">
+                            <div class="bg-slate-900 p-4 rounded-2xl text-yellow-400 mb-6 border border-slate-700 shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-3">Sur-Mesure</h3>
@@ -212,7 +179,7 @@
                         </article>
                         <!-- Carte 2 -->
                         <article class="flex flex-col items-center text-center">
-                            <div class="bg-brand-900 p-4 rounded-2xl text-brand-accent mb-6 border border-brand-700 shadow-md">
+                            <div class="bg-slate-900 p-4 rounded-2xl text-yellow-400 mb-6 border border-slate-700 shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-3">Proximité</h3>
@@ -220,7 +187,7 @@
                         </article>
                         <!-- Carte 3 -->
                         <article class="flex flex-col items-center text-center">
-                            <div class="bg-brand-900 p-4 rounded-2xl text-brand-accent mb-6 border border-brand-700 shadow-md">
+                            <div class="bg-slate-900 p-4 rounded-2xl text-yellow-400 mb-6 border border-slate-700 shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-3">Réactivité</h3>
@@ -233,10 +200,10 @@
 
         <!-- === PAGE EXPERTISE === -->
         <div id="expertise" class="page-section" role="tabpanel" aria-labelledby="tab-expertise">
-            <section class="py-20 bg-brand-900">
+            <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16 animate-slide-up">
-                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Mes Compétences</span>
+                        <span class="text-yellow-400 font-bold tracking-widest text-xs uppercase mb-3 block">Mes Compétences</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Expertise Technique</h2>
                         <p class="text-slate-300 text-center max-w-3xl mx-auto text-lg leading-relaxed">
                             Mon profil hybride me permet d'intervenir sur l'ensemble de la chaîne de production : de l'interface utilisateur (Frontend) jusqu'au cœur logique des applications (Backend & Logiciel).
@@ -245,42 +212,42 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <!-- Skill 1 -->
-                        <div class="bg-brand-800 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-                            <div class="w-14 h-14 bg-brand-900 rounded-xl flex items-center justify-center text-brand-accent mb-6 border border-brand-700">
+                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">Web Frontend</h3>
                             <ul class="space-y-3">
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Sites Vitrines & E-commerce</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> React.js / Next.js</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Tailwind CSS & Design</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> SEO & Performance Web</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Sites Vitrines & E-commerce</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> React.js / Next.js</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Tailwind CSS & Design</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> SEO & Performance Web</li>
                             </ul>
                         </div>
                         <!-- Skill 2 -->
-                        <div class="bg-brand-800 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-                            <div class="w-14 h-14 bg-brand-900 rounded-xl flex items-center justify-center text-brand-accent mb-6 border border-brand-700">
+                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">Backend & Logiciel</h3>
                             <ul class="space-y-3">
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> C++ / Qt Framework</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Python & Automatisation</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> API REST / GraphQL</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Bases de données SQL</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> C++ / Qt Framework</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Python & Automatisation</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> API REST / GraphQL</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Bases de données SQL</li>
                             </ul>
                         </div>
                         <!-- Skill 3 -->
-                        <div class="bg-brand-800 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-                            <div class="w-14 h-14 bg-brand-900 rounded-xl flex items-center justify-center text-brand-accent mb-6 border border-brand-700">
+                        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">Mobile & DevOps</h3>
                             <ul class="space-y-3">
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Design Mobile First</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> PWA (Web Apps)</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Git, Docker & CI/CD</li>
-                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Accessibilité (WCAG AA)</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Design Mobile First</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> PWA (Web Apps)</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Git, Docker & CI/CD</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Accessibilité (WCAG AA)</li>
                             </ul>
                         </div>
                     </div>
@@ -290,10 +257,10 @@
 
         <!-- === PAGE PROJETS === -->
         <div id="projets" class="page-section" role="tabpanel" aria-labelledby="tab-projets">
-            <section class="py-20 bg-brand-900">
+            <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16 animate-slide-up">
-                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Portfolio</span>
+                        <span class="text-yellow-400 font-bold tracking-widest text-xs uppercase mb-3 block">Portfolio</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Réalisations & Cas Clients</h2>
                         <p class="text-slate-300 text-center max-w-3xl mx-auto text-lg">
                             Une sélection de projets variés démontrant ma capacité à livrer des produits finis, optimisés et maintenables.
@@ -302,66 +269,66 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
                         <!-- Projet 1 -->
-                        <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                        <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
-                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Web</span>
+                                    <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Web</span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">E-Commerce Bio</h3>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors">E-Commerce Bio</h3>
                                 <p class="text-slate-300 mb-6 leading-relaxed">Boutique en ligne complète pour un producteur local. Optimisée pour le SEO local, intégration Stripe pour les paiements sécurisés et back-office de gestion des stocks.</p>
                             </div>
                             <div class="px-8 pb-8 pt-0 mt-auto">
                                 <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Symfony</span>
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">MySQL</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">Symfony</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">MySQL</span>
                                 </div>
                             </div>
                         </article>
                          <!-- Projet 2 -->
-                         <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
-                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Logiciel</span>
+                                    <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Logiciel</span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">Gestion Portuaire</h3>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors">Gestion Portuaire</h3>
                                 <p class="text-slate-300 mb-6 leading-relaxed">Outil C++ haute performance pour la logistique des conteneurs. Interface Qt moderne, calculs de charge en temps réel et export de rapports PDF automatiques.</p>
                             </div>
                             <div class="px-8 pb-8 pt-0 mt-auto">
                                 <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">C++</span>
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Qt 6</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">C++</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">Qt 6</span>
                                 </div>
                             </div>
                         </article>
                          <!-- Projet 3 -->
-                         <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
-                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Frontend</span>
+                                    <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Frontend</span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">Dashboard SaaS</h3>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors">Dashboard SaaS</h3>
                                 <p class="text-slate-300 mb-6 leading-relaxed">Tableau de bord financier interactif. Visualisation de données complexes avec D3.js, animations fluides et chargement asynchrone ultra-rapide.</p>
                             </div>
                             <div class="px-8 pb-8 pt-0 mt-auto">
                                 <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">React</span>
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Tailwind</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">React</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">Tailwind</span>
                                 </div>
                             </div>
                         </article>
                          <!-- Projet 4 -->
-                         <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
-                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Algo</span>
+                                    <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Algo</span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">Simulateur Marées</h3>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors">Simulateur Marées</h3>
                                 <p class="text-slate-300 mb-6 leading-relaxed">Script Python d'optimisation et de prédiction utilisé pour des simulations maritimes professionnelles. Précision accrue grâce à NumPy.</p>
                             </div>
                             <div class="px-8 pb-8 pt-0 mt-auto">
                                 <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Python</span>
-                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">NumPy</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">Python</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-slate-700 bg-slate-900 px-3 py-1.5 rounded-md">NumPy</span>
                                 </div>
                             </div>
                         </article>
@@ -372,34 +339,34 @@
 
         <!-- === PAGE CONTACT === -->
         <div id="contact" class="page-section" role="tabpanel" aria-labelledby="tab-contact">
-            <section class="py-20 bg-brand-900">
+            <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16 animate-slide-up">
-                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Contact</span>
+                        <span class="text-yellow-400 font-bold tracking-widest text-xs uppercase mb-3 block">Contact</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-white">Démarrons un Projet</h2>
-                        <div class="w-16 h-1 bg-brand-accent mx-auto mt-6 rounded-full"></div>
+                        <div class="w-16 h-1 bg-yellow-400 mx-auto mt-6 rounded-full"></div>
                     </div>
                     
-                    <div class="max-w-4xl mx-auto bg-brand-800 rounded-3xl p-8 md:p-12 shadow-2xl border border-brand-700 flex flex-col md:flex-row gap-12">
+                    <div class="max-w-4xl mx-auto bg-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl border border-slate-700 flex flex-col md:flex-row gap-12">
                         <div class="md:w-1/3">
                             <h3 class="text-2xl font-bold text-white mb-6">Parlons de votre projet</h3>
                             <p class="text-slate-300 mb-8 leading-relaxed">Vous avez un projet web ou logiciel à Caen ou ailleurs ? Je suis disponible pour en discuter. Réponse sous 24h.</p>
                             <div class="space-y-6">
                                 <div class="flex items-center gap-4 text-slate-300">
-                                    <div class="w-12 h-12 bg-brand-900 rounded-full flex items-center justify-center text-brand-accent border border-brand-700 shrink-0">
+                                    <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-yellow-400 border border-slate-700 shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-brand-accent uppercase font-bold tracking-wider mb-1">Localisation</div>
+                                        <div class="text-xs text-yellow-400 uppercase font-bold tracking-wider mb-1">Localisation</div>
                                         <div class="font-medium">Caen, Normandie</div>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-4 text-slate-300">
-                                    <div class="w-12 h-12 bg-brand-900 rounded-full flex items-center justify-center text-brand-accent border border-brand-700 shrink-0">
+                                    <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-yellow-400 border border-slate-700 shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-brand-accent uppercase font-bold tracking-wider mb-1">Statut</div>
+                                        <div class="text-xs text-yellow-400 uppercase font-bold tracking-wider mb-1">Statut</div>
                                         <div class="font-medium">Freelance Disponible</div>
                                     </div>
                                 </div>
@@ -410,18 +377,18 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div class="space-y-2">
                                     <label for="nom" class="text-sm font-bold text-slate-300">Nom</label>
-                                    <input type="text" id="nom" name="nom" class="w-full bg-brand-900 border border-brand-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600 focus:border-transparent" placeholder="Votre nom" required aria-required="true">
+                                    <input type="text" id="nom" name="nom" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-yellow-400 outline-none transition-all placeholder-slate-600 focus:border-transparent" placeholder="Votre nom" required aria-required="true">
                                 </div>
                                 <div class="space-y-2">
                                     <label for="email" class="text-sm font-bold text-slate-300">Email</label>
-                                    <input type="email" id="email" name="email" class="w-full bg-brand-900 border border-brand-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600 focus:border-transparent" placeholder="email@exemple.com" required aria-required="true">
+                                    <input type="email" id="email" name="email" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-yellow-400 outline-none transition-all placeholder-slate-600 focus:border-transparent" placeholder="email@exemple.com" required aria-required="true">
                                 </div>
                             </div>
                             <div class="space-y-2">
                                 <label for="message" class="text-sm font-bold text-slate-300">Message</label>
-                                <textarea id="message" name="message" rows="5" class="w-full bg-brand-900 border border-brand-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600 focus:border-transparent resize-y" placeholder="Décrivez votre besoin..." required aria-required="true"></textarea>
+                                <textarea id="message" name="message" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-yellow-400 outline-none transition-all placeholder-slate-600 focus:border-transparent resize-y" placeholder="Décrivez votre besoin..." required aria-required="true"></textarea>
                             </div>
-                            <button type="submit" class="w-full py-4 bg-brand-accent text-brand-900 font-bold text-lg rounded-xl hover:bg-brand-accentHover transition-colors shadow-lg shadow-brand-accent/10 transform active:scale-[0.98]">
+                            <button type="submit" class="w-full py-4 bg-yellow-400 text-slate-900 font-bold text-lg rounded-xl hover:bg-yellow-500 transition-colors shadow-lg shadow-yellow-400/10 transform active:scale-[0.98]">
                                 Envoyer la demande
                             </button>
                         </form>
@@ -433,7 +400,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black py-10 border-t border-brand-800 text-center mt-auto" role="contentinfo">
+    <footer class="bg-black py-10 border-t border-slate-800 text-center mt-auto" role="contentinfo">
         <div class="container mx-auto px-6">
             <p class="text-slate-500 text-sm flex items-center justify-center gap-2">
                 © <span id="year">2026</span> Robin Matelot - Développeur Web à Caen. Tous droits réservés.
@@ -479,16 +446,27 @@
                 targetSection.classList.add('active');
             }
 
-            // Gestion de l'état actif dans la nav (ARIA)
+            // Gestion de l'état actif dans la nav Desktop (ARIA)
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('text-brand-accent');
+                link.classList.remove('text-yellow-400');
                 link.classList.add('text-slate-300');
                 link.removeAttribute('aria-current');
                 
                 if(link.getAttribute('data-target') === targetId) {
-                    link.classList.add('text-brand-accent');
+                    link.classList.add('text-yellow-400');
                     link.classList.remove('text-slate-300');
                     link.setAttribute('aria-current', 'page');
+                }
+            });
+
+            // Gestion de l'état actif dans la nav Mobile (Ajouté pour fixer le problème "tout blanc")
+            document.querySelectorAll('.nav-link-mobile').forEach(link => {
+                link.classList.remove('text-yellow-400');
+                link.classList.add('text-slate-200');
+                
+                if(link.getAttribute('data-target') === targetId) {
+                    link.classList.add('text-yellow-400');
+                    link.classList.remove('text-slate-200');
                 }
             });
 
@@ -497,8 +475,14 @@
         }
 
         // Init
-        document.querySelector('.nav-link[data-target="accueil"]').classList.add('text-brand-accent');
+        document.querySelector('.nav-link[data-target="accueil"]').classList.add('text-yellow-400');
         document.querySelector('.nav-link[data-target="accueil"]').classList.remove('text-slate-300');
+        // Init Mobile
+        const activeMobile = document.querySelector('.nav-link-mobile[data-target="accueil"]');
+        if(activeMobile) {
+            activeMobile.classList.add('text-yellow-400');
+            activeMobile.classList.remove('text-slate-200');
+        }
     </script>
 </body>
 </html>
