@@ -6,32 +6,33 @@
     
     <!-- SEO & Meta Tags Stratégiques -->
     <title>Robin Matelot - Développeur Web Freelance à Caen | Création Site Internet</title>
-    <meta name="description" content="Robin Matelot, développeur web freelance basé à Caen (Normandie). Expert React, C++, Python et création de sites sur-mesure. Devis gratuit.">
-    <meta name="keywords" content="développeur web caen, freelance informatique caen, création site internet normandie, développeur react, développeur fullstack, Robin Matelot">
+    <meta name="description" content="Robin Matelot, développeur web freelance à Caen. Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
+    <meta name="keywords" content="développeur web caen, freelance informatique caen, site internet normandie, développeur react, robin matelot">
     <meta name="author" content="Robin Matelot">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://robinmatelot.fr">
     
-    <!-- Tailwind CSS (Script Différé pour ne pas bloquer le rendu initial) -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Configuration Tailwind (Avant le script pour garantir l'application) -->
     <script>
-        // Configuration Tailwind immédiate
         window.tailwind = {
             config: {
                 theme: {
                     extend: {
                         colors: {
                             brand: {
-                                900: '#0f172a', // Slate 900
-                                800: '#1e293b', // Slate 800
-                                accent: '#eab308', // Yellow 500
+                                900: '#0f172a', // Slate 900 (Fond sombre profond)
+                                800: '#1e293b', // Slate 800 (Cartes)
+                                700: '#334155', // Slate 700 (Bordures)
+                                accent: '#facc15', // Yellow 400 (Le jaune vif original)
+                                accentHover: '#eab308', // Yellow 500 (Pour les survols)
                             }
                         },
                         fontFamily: {
-                            sans: ['Inter', 'sans-serif'],
+                            sans: ['Inter', 'system-ui', 'sans-serif'],
                         },
                         animation: {
-                            'fade-in': 'fadeIn 0.5s ease-out forwards',
-                            'slide-up': 'slideUp 0.5s ease-out forwards',
+                            'fade-in': 'fadeIn 0.6s ease-out forwards',
+                            'slide-up': 'slideUp 0.6s ease-out forwards',
                         },
                         keyframes: {
                             fadeIn: {
@@ -48,19 +49,22 @@
             }
         }
     </script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts Optimisé (Preconnect + Swap) -->
+    <!-- Google Fonts Optimisé -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Schema.org JSON-LD (SEO Local) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "Robin Matelot",
       "url": "https://robinmatelot.fr",
+      "image": "https://robinmatelot.fr/logo.png",
       "jobTitle": "Développeur Web Freelance",
       "address": {
         "@type": "PostalAddress",
@@ -69,192 +73,214 @@
         "postalCode": "14000",
         "addressCountry": "FR"
       },
-      "description": "Services de développement web, création de sites internet et programmation logicielle à Caen et en Normandie."
+      "priceRange": "€€",
+      "description": "Services de développement web et logiciel sur-mesure à Caen."
     }
     </script>
 
     <style>
-        /* Styles critiques inlined pour éviter le FOUC (Flash of Unstyled Content) */
-        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
-        .page-section { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
-        .page-section.active { display: block; opacity: 1; }
-        .nav-link.active { color: #eab308; font-weight: 700; }
-        /* Utilitaires de masquage pour le chargement */
-        [x-cloak] { display: none !important; }
+        /* Styles critiques et Reset */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0f172a; 
+            color: #e2e8f0;
+            overflow-x: hidden; 
+        }
+        
+        /* Gestion SPA (Single Page Application) */
+        .page-section { 
+            display: none; 
+            opacity: 0; 
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .page-section.active { 
+            display: block; 
+        }
+
+        /* Accessibilité : Focus visible */
+        *:focus-visible {
+            outline: 2px solid #facc15;
+            outline-offset: 2px;
+        }
+
+        /* Utilitaires d'animation */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-brand-900 text-slate-200 antialiased selection:bg-brand-accent selection:text-brand-900 overflow-x-hidden">
+<body class="bg-brand-900 text-slate-200 antialiased selection:bg-brand-accent selection:text-brand-900">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-brand-900/95 backdrop-blur-md shadow-md py-4 border-b border-slate-800" role="navigation" aria-label="Menu principal">
+    <!-- Navigation (Skip Link pour a11y) -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-accent text-brand-900 px-4 py-2 rounded font-bold z-50">
+        Aller au contenu principal
+    </a>
+
+    <!-- Navbar: Suppression de la transparence (bg-brand-900 solide) -->
+    <nav class="fixed w-full z-50 bg-brand-900 shadow-lg py-4 border-b border-brand-800" aria-label="Menu principal">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#" onclick="navigateTo('accueil'); return false;" class="text-xl font-bold text-white flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <!-- Logo -->
+            <a href="#" onclick="navigateTo('accueil'); return false;" class="text-xl font-bold text-white flex items-center gap-2 hover:opacity-80 transition-opacity p-1" aria-label="Retour à l'accueil">
                 <span class="text-brand-accent">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
                 </span>
                 <span class="tracking-tight">Robin<span class="text-brand-accent">Matelot</span></span>
             </a>
 
             <!-- Desktop Menu -->
-            <ul class="hidden md:flex gap-8 items-center">
-                <li><a href="#" onclick="navigateTo('accueil'); return false;" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors" data-target="accueil">Accueil</a></li>
-                <li><a href="#" onclick="navigateTo('expertise'); return false;" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors" data-target="expertise">Expertise</a></li>
-                <li><a href="#" onclick="navigateTo('projets'); return false;" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition-colors" data-target="projets">Projets</a></li>
+            <ul class="hidden md:flex gap-8 items-center list-none m-0 p-0">
+                <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors py-2" aria-current="page" data-target="accueil">Accueil</a></li>
+                <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors py-2" data-target="expertise">Expertise</a></li>
+                <li><a href="#projets" onclick="navigateTo('projets'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors py-2" data-target="projets">Projets</a></li>
                 <li>
-                    <a href="#" onclick="navigateTo('contact'); return false;" class="px-5 py-2 bg-brand-accent text-brand-900 font-bold rounded-full text-sm hover:bg-white transition-colors">
+                    <a href="#contact" onclick="navigateTo('contact'); return false;" class="px-6 py-2.5 bg-brand-accent text-brand-900 font-bold rounded-full text-sm hover:bg-brand-accentHover transition-colors shadow-lg transform active:scale-95" data-target="contact">
                         Me contacter
                     </a>
                 </li>
             </ul>
 
-            <!-- Mobile Toggle Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Ouvrir le menu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            <!-- Mobile Toggle Button (48px target size) -->
+            <button id="mobile-menu-btn" class="md:hidden text-white p-3 -mr-3 rounded-lg hover:bg-brand-800 focus:ring-2 focus:ring-brand-accent" aria-label="Ouvrir le menu" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
             </button>
         </div>
 
-        <!-- Mobile Menu Overlay (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-800 border-b border-slate-700 shadow-xl">
-            <ul class="flex flex-col p-4 gap-4">
-                <li><a href="#" onclick="navigateTo('accueil'); return false;" class="block w-full text-left py-2 px-4 rounded-lg text-slate-300 hover:bg-slate-700">Accueil</a></li>
-                <li><a href="#" onclick="navigateTo('expertise'); return false;" class="block w-full text-left py-2 px-4 rounded-lg text-slate-300 hover:bg-slate-700">Expertise</a></li>
-                <li><a href="#" onclick="navigateTo('projets'); return false;" class="block w-full text-left py-2 px-4 rounded-lg text-slate-300 hover:bg-slate-700">Projets</a></li>
-                <li><a href="#" onclick="navigateTo('contact'); return false;" class="block w-full text-left py-2 px-4 rounded-lg text-slate-300 hover:bg-slate-700 font-bold text-brand-accent">Me contacter</a></li>
+        <!-- Mobile Menu Overlay: Fond solide opaque (bg-brand-900) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-900 border-b border-brand-800 shadow-2xl" role="region" aria-label="Menu mobile">
+            <ul class="flex flex-col p-4 gap-2 list-none m-0">
+                <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-brand-800 font-medium active:bg-brand-800 border-b border-brand-800/50">Accueil</a></li>
+                <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-brand-800 font-medium active:bg-brand-800 border-b border-brand-800/50">Expertise</a></li>
+                <li><a href="#projets" onclick="navigateTo('projets'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-brand-800 font-medium active:bg-brand-800 border-b border-brand-800/50">Projets</a></li>
+                <li><a href="#contact" onclick="navigateTo('contact'); return false;" class="block w-full text-left py-4 px-4 rounded-lg text-brand-accent font-bold hover:bg-brand-800 active:bg-brand-800">Me contacter</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Main Content Area -->
-    <main class="pt-20 min-h-screen">
+    <!-- Main Content -->
+    <main id="main-content" class="pt-20 min-h-screen">
 
         <!-- === PAGE ACCUEIL === -->
-        <div id="accueil" class="page-section active">
-            <!-- Hero -->
-            <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-                <!-- Background optimisé (CSS pur, pas de JS) -->
+        <div id="accueil" class="page-section active" role="tabpanel" aria-labelledby="tab-accueil">
+            <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+                <!-- Décoration de fond -->
                 <div class="absolute inset-0 bg-gradient-to-b from-brand-900 via-brand-800 to-brand-900 z-0"></div>
-                <!-- Forme décorative CSS pur -->
-                <div class="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-brand-accent/5 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-accent/5 rounded-full blur-3xl"></div>
                 
                 <div class="container mx-auto px-6 relative z-10 text-center pt-10">
-                    <span class="inline-block px-4 py-2 bg-brand-800 border border-slate-700 rounded-full text-brand-accent text-sm font-medium mb-6 animate-fade-in">
-                        📍 Disponible à Caen & en Normandie
-                    </span>
-                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight animate-slide-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-800 border border-brand-700 rounded-full text-brand-accent text-sm font-semibold mb-8 shadow-sm animate-fade-in">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Disponible à Caen & en Normandie
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight animate-slide-up">
                         Développeur Web & <br />
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-200">
                             Logiciel Freelance
                         </span>
                     </h1>
-                    <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in">
+                    
+                    <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.2s;">
                         J'accompagne les entreprises normandes dans la conception de sites web performants, d'applications React sur-mesure et de logiciels C++ robustes.
                     </p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in">
-                        <button onclick="navigateTo('contact')" class="px-8 py-4 bg-brand-accent text-brand-900 font-bold rounded-lg hover:bg-white transition-all transform hover:-translate-y-1 shadow-lg shadow-brand-accent/20 flex items-center justify-center gap-2">
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.3s;">
+                        <button onclick="navigateTo('contact')" class="group px-8 py-4 bg-brand-accent text-brand-900 font-bold rounded-xl hover:bg-brand-accentHover transition-all shadow-lg shadow-brand-accent/10 flex items-center justify-center gap-2 transform hover:-translate-y-1">
                             Discuter de votre projet 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            <svg class="transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         </button>
-                        <button onclick="navigateTo('projets')" class="px-8 py-4 border border-slate-600 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+                        <button onclick="navigateTo('projets')" class="px-8 py-4 bg-transparent border border-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 hover:border-brand-accent transition-colors">
                             Voir mon portfolio
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Pourquoi Moi -->
-            <section class="py-20 bg-brand-800 border-t border-slate-800">
+            <!-- Section Valeurs (Réassurance) -->
+            <section class="py-24 bg-brand-800 border-t border-brand-700">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-12">
-                        <span class="text-brand-accent font-semibold tracking-wider text-sm uppercase mb-2 block">Valeurs Ajoutées</span>
+                    <div class="text-center mb-16">
+                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Valeurs Ajoutées</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-white">Pourquoi choisir un Freelance ?</h2>
-                        <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        <!-- Feature 1 -->
-                        <div class="flex flex-col items-center text-center p-4">
-                            <div class="bg-brand-900 p-3 rounded-full text-brand-accent mb-4 border border-slate-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+                        <!-- Carte 1 -->
+                        <article class="flex flex-col items-center text-center">
+                            <div class="bg-brand-900 p-4 rounded-2xl text-brand-accent mb-6 border border-brand-700 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                             </div>
-                            <h4 class="font-bold text-white mb-2">Sur-Mesure</h4>
-                            <p class="text-sm text-slate-400">Pas de templates tout faits. Je conçois des solutions adaptées exactement à vos besoins métier.</p>
-                        </div>
-                        <!-- Feature 2 -->
-                        <div class="flex flex-col items-center text-center p-4">
-                            <div class="bg-brand-900 p-3 rounded-full text-brand-accent mb-4 border border-slate-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <h3 class="text-xl font-bold text-white mb-3">Sur-Mesure</h3>
+                            <p class="text-slate-400 leading-relaxed">Pas de templates tout faits. Je conçois des solutions adaptées exactement à vos besoins métier spécifiques.</p>
+                        </article>
+                        <!-- Carte 2 -->
+                        <article class="flex flex-col items-center text-center">
+                            <div class="bg-brand-900 p-4 rounded-2xl text-brand-accent mb-6 border border-brand-700 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
-                            <h4 class="font-bold text-white mb-2">Proximité</h4>
-                            <p class="text-sm text-slate-400">Basé à Caen, je suis disponible pour vous rencontrer et échanger en direct sur votre vision.</p>
-                        </div>
-                        <!-- Feature 3 -->
-                        <div class="flex flex-col items-center text-center p-4">
-                            <div class="bg-brand-900 p-3 rounded-full text-brand-accent mb-4 border border-slate-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <h3 class="text-xl font-bold text-white mb-3">Proximité</h3>
+                            <p class="text-slate-400 leading-relaxed">Basé à Caen, je privilégie les relations humaines et suis disponible pour vous rencontrer en direct.</p>
+                        </article>
+                        <!-- Carte 3 -->
+                        <article class="flex flex-col items-center text-center">
+                            <div class="bg-brand-900 p-4 rounded-2xl text-brand-accent mb-6 border border-brand-700 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             </div>
-                            <h4 class="font-bold text-white mb-2">Réactivité</h4>
-                            <p class="text-sm text-slate-400">Un interlocuteur unique pour une communication fluide et des délais respectés.</p>
-                        </div>
-                    </div>
-                    <div class="text-center mt-12">
-                        <button onclick="navigateTo('expertise')" class="text-brand-accent hover:text-white font-semibold underline underline-offset-4 transition-colors">
-                            Découvrir mes compétences techniques &rarr;
-                        </button>
+                            <h3 class="text-xl font-bold text-white mb-3">Réactivité</h3>
+                            <p class="text-slate-400 leading-relaxed">Un interlocuteur unique pour une communication fluide, sans intermédiaire, et des délais respectés.</p>
+                        </article>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- === PAGE EXPERTISE === -->
-        <div id="expertise" class="page-section">
+        <div id="expertise" class="page-section" role="tabpanel" aria-labelledby="tab-expertise">
             <section class="py-20 bg-brand-900">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-12 animate-slide-up">
-                        <span class="text-brand-accent font-semibold tracking-wider text-sm uppercase mb-2 block">Mes Services</span>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white">Expertise Technique</h2>
-                        <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+                    <div class="text-center mb-16 animate-slide-up">
+                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Mes Compétences</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Expertise Technique</h2>
+                        <p class="text-slate-300 text-center max-w-3xl mx-auto text-lg leading-relaxed">
+                            Mon profil hybride me permet d'intervenir sur l'ensemble de la chaîne de production : de l'interface utilisateur (Frontend) jusqu'au cœur logique des applications (Backend & Logiciel).
+                        </p>
                     </div>
-                    <p class="text-slate-400 text-center max-w-3xl mx-auto mb-16">
-                        Mon profil hybride me permet d'intervenir sur l'ensemble de la chaîne de production : de l'interface utilisateur (Frontend) jusqu'au cœur logique des applications (Backend & Logiciel).
-                    </p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <!-- Skill 1 -->
-                        <div class="bg-brand-800 p-6 rounded-xl border border-slate-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:-translate-y-1 h-full">
-                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-brand-accent mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        <div class="bg-brand-800 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-brand-900 rounded-xl flex items-center justify-center text-brand-accent mb-6 border border-brand-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-4">Développement Web</h3>
-                            <ul class="space-y-2 text-sm text-slate-300">
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Sites Vitrines & E-commerce</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> React.js / Next.js</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Tailwind CSS</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> SEO & Performance</li>
+                            <h3 class="text-2xl font-bold text-white mb-4">Web Frontend</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Sites Vitrines & E-commerce</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> React.js / Next.js</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Tailwind CSS & Design</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> SEO & Performance Web</li>
                             </ul>
                         </div>
                         <!-- Skill 2 -->
-                        <div class="bg-brand-800 p-6 rounded-xl border border-slate-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:-translate-y-1 h-full">
-                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-brand-accent mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        <div class="bg-brand-800 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-brand-900 rounded-xl flex items-center justify-center text-brand-accent mb-6 border border-brand-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-4">Logiciel & Backend</h3>
-                            <ul class="space-y-2 text-sm text-slate-300">
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> C++ / Qt Framework</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Python & Automation</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> API REST / GraphQL</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Bases de données SQL</li>
+                            <h3 class="text-2xl font-bold text-white mb-4">Backend & Logiciel</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> C++ / Qt Framework</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Python & Automatisation</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> API REST / GraphQL</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Bases de données SQL</li>
                             </ul>
                         </div>
                         <!-- Skill 3 -->
-                        <div class="bg-brand-800 p-6 rounded-xl border border-slate-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:-translate-y-1 h-full">
-                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-brand-accent mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                        <div class="bg-brand-800 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-brand-900 rounded-xl flex items-center justify-center text-brand-accent mb-6 border border-brand-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-4">Mobile & DevOps</h3>
-                            <ul class="space-y-2 text-sm text-slate-300">
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Responsive Mobile First</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> PWA (Web Apps)</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Git & CI/CD</li>
-                                <li class="flex items-center gap-2"><span class="text-brand-accent">✓</span> Accessibilité (WCAG)</li>
+                            <h3 class="text-2xl font-bold text-white mb-4">Mobile & DevOps</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Design Mobile First</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> PWA (Web Apps)</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Git, Docker & CI/CD</li>
+                                <li class="flex items-center gap-3 text-slate-300"><span class="text-brand-accent font-bold">✓</span> Accessibilité (WCAG AA)</li>
                             </ul>
                         </div>
                     </div>
@@ -263,155 +289,141 @@
         </div>
 
         <!-- === PAGE PROJETS === -->
-        <div id="projets" class="page-section">
+        <div id="projets" class="page-section" role="tabpanel" aria-labelledby="tab-projets">
             <section class="py-20 bg-brand-900">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-12 animate-slide-up">
-                        <span class="text-brand-accent font-semibold tracking-wider text-sm uppercase mb-2 block">Portfolio</span>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white">Réalisations & Cas Clients</h2>
-                        <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+                    <div class="text-center mb-16 animate-slide-up">
+                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Portfolio</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Réalisations & Cas Clients</h2>
+                        <p class="text-slate-300 text-center max-w-3xl mx-auto text-lg">
+                            Une sélection de projets variés démontrant ma capacité à livrer des produits finis, optimisés et maintenables.
+                        </p>
                     </div>
-                    <p class="text-slate-400 text-center max-w-3xl mx-auto mb-16">
-                        Une sélection de projets variés démontrant ma capacité à livrer des produits finis, optimisés et maintenables.
-                    </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
                         <!-- Projet 1 -->
-                        <article class="group bg-brand-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 hover:shadow-brand-accent/10 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
-                            <div class="p-6 flex-grow">
-                                <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-2 py-1 rounded mb-4 inline-block">Web</span>
-                                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-brand-accent transition-colors">E-Commerce Bio</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed text-sm">Boutique en ligne complète. Optimisée SEO local, paiement Stripe, gestion stocks.</p>
+                        <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                            <div class="p-8 flex-grow">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Web</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">E-Commerce Bio</h3>
+                                <p class="text-slate-300 mb-6 leading-relaxed">Boutique en ligne complète pour un producteur local. Optimisée pour le SEO local, intégration Stripe pour les paiements sécurisés et back-office de gestion des stocks.</p>
                             </div>
-                            <div class="p-6 pt-0 mt-auto flex flex-wrap gap-2">
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">Symfony</span>
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">MySQL</span>
+                            <div class="px-8 pb-8 pt-0 mt-auto">
+                                <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Symfony</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">MySQL</span>
+                                </div>
                             </div>
                         </article>
                          <!-- Projet 2 -->
-                         <article class="group bg-brand-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 hover:shadow-brand-accent/10 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
-                            <div class="p-6 flex-grow">
-                                <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-2 py-1 rounded mb-4 inline-block">Logiciel</span>
-                                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-brand-accent transition-colors">Gestion Portuaire</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed text-sm">Outil C++ haute performance pour la logistique. Interface Qt, calculs temps réel.</p>
+                         <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                            <div class="p-8 flex-grow">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Logiciel</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">Gestion Portuaire</h3>
+                                <p class="text-slate-300 mb-6 leading-relaxed">Outil C++ haute performance pour la logistique des conteneurs. Interface Qt moderne, calculs de charge en temps réel et export de rapports PDF automatiques.</p>
                             </div>
-                            <div class="p-6 pt-0 mt-auto flex flex-wrap gap-2">
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">C++</span>
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">Qt</span>
+                            <div class="px-8 pb-8 pt-0 mt-auto">
+                                <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">C++</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Qt 6</span>
+                                </div>
                             </div>
                         </article>
                          <!-- Projet 3 -->
-                         <article class="group bg-brand-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 hover:shadow-brand-accent/10 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
-                            <div class="p-6 flex-grow">
-                                <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-2 py-1 rounded mb-4 inline-block">Frontend</span>
-                                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-brand-accent transition-colors">Dashboard SaaS</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed text-sm">Tableau de bord financier interactif. Visualisation D3.js, animations fluides.</p>
+                         <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                            <div class="p-8 flex-grow">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Frontend</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">Dashboard SaaS</h3>
+                                <p class="text-slate-300 mb-6 leading-relaxed">Tableau de bord financier interactif. Visualisation de données complexes avec D3.js, animations fluides et chargement asynchrone ultra-rapide.</p>
                             </div>
-                            <div class="p-6 pt-0 mt-auto flex flex-wrap gap-2">
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">React</span>
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">Tailwind</span>
+                            <div class="px-8 pb-8 pt-0 mt-auto">
+                                <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">React</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Tailwind</span>
+                                </div>
                             </div>
                         </article>
                          <!-- Projet 4 -->
-                         <article class="group bg-brand-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 hover:shadow-brand-accent/10 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
-                            <div class="p-6 flex-grow">
-                                <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-2 py-1 rounded mb-4 inline-block">Algo</span>
-                                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-brand-accent transition-colors">Simulateur Marées</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed text-sm">Script d'optimisation et prédiction pour simulations maritimes.</p>
+                         <article class="flex flex-col h-full bg-brand-800 rounded-2xl overflow-hidden border border-brand-700 hover:border-brand-accent transition-all duration-300 hover:shadow-2xl group">
+                            <div class="p-8 flex-grow">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="text-xs font-bold text-brand-accent uppercase tracking-wider bg-brand-accent/10 px-3 py-1.5 rounded-full">Algo</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-accent transition-colors">Simulateur Marées</h3>
+                                <p class="text-slate-300 mb-6 leading-relaxed">Script Python d'optimisation et de prédiction utilisé pour des simulations maritimes professionnelles. Précision accrue grâce à NumPy.</p>
                             </div>
-                            <div class="p-6 pt-0 mt-auto flex flex-wrap gap-2">
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">Python</span>
-                                <span class="text-xs font-mono text-slate-500 border border-slate-700 px-2 py-1 rounded">NumPy</span>
+                            <div class="px-8 pb-8 pt-0 mt-auto">
+                                <div class="flex flex-wrap gap-2" aria-label="Technologies utilisées">
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">Python</span>
+                                    <span class="text-xs font-mono text-slate-400 border border-brand-700 bg-brand-900 px-3 py-1.5 rounded-md">NumPy</span>
+                                </div>
                             </div>
                         </article>
-                    </div>
-
-                    <!-- Processus -->
-                    <div class="border-t border-slate-800 pt-16">
-                        <div class="text-center mb-12">
-                            <span class="text-brand-accent font-semibold tracking-wider text-sm uppercase mb-2 block">Processus</span>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white">Comment je travaille ?</h2>
-                            <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-                            <div class="p-4">
-                                <div class="text-4xl font-bold text-brand-800 mb-2">01</div>
-                                <h4 class="text-xl font-bold text-white mb-2">Analyse</h4>
-                                <p class="text-sm text-slate-400">Compréhension des besoins et cahier des charges.</p>
-                            </div>
-                            <div class="p-4">
-                                <div class="text-4xl font-bold text-brand-800 mb-2">02</div>
-                                <h4 class="text-xl font-bold text-white mb-2">Design</h4>
-                                <p class="text-sm text-slate-400">Maquettes et architecture technique.</p>
-                            </div>
-                            <div class="p-4">
-                                <div class="text-4xl font-bold text-brand-800 mb-2">03</div>
-                                <h4 class="text-xl font-bold text-white mb-2">Code</h4>
-                                <p class="text-sm text-slate-400">Développement propre, testé et optimisé.</p>
-                            </div>
-                            <div class="p-4">
-                                <div class="text-4xl font-bold text-brand-800 mb-2">04</div>
-                                <h4 class="text-xl font-bold text-white mb-2">Livraison</h4>
-                                <p class="text-sm text-slate-400">Mise en ligne, formation et suivi.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- === PAGE CONTACT === -->
-        <div id="contact" class="page-section">
+        <div id="contact" class="page-section" role="tabpanel" aria-labelledby="tab-contact">
             <section class="py-20 bg-brand-900">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-12 animate-slide-up">
-                        <span class="text-brand-accent font-semibold tracking-wider text-sm uppercase mb-2 block">Me Contacter</span>
+                    <div class="text-center mb-16 animate-slide-up">
+                        <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-3 block">Contact</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-white">Démarrons un Projet</h2>
-                        <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+                        <div class="w-16 h-1 bg-brand-accent mx-auto mt-6 rounded-full"></div>
                     </div>
                     
-                    <div class="max-w-4xl mx-auto bg-brand-800 rounded-2xl p-8 md:p-12 shadow-2xl border border-slate-700 flex flex-col md:flex-row gap-12">
+                    <div class="max-w-4xl mx-auto bg-brand-800 rounded-3xl p-8 md:p-12 shadow-2xl border border-brand-700 flex flex-col md:flex-row gap-12">
                         <div class="md:w-1/3">
                             <h3 class="text-2xl font-bold text-white mb-6">Parlons de votre projet</h3>
-                            <p class="text-slate-400 mb-8">Vous avez un projet web ou logiciel à Caen ou ailleurs ? Je suis disponible pour en discuter. Réponse sous 24h.</p>
+                            <p class="text-slate-300 mb-8 leading-relaxed">Vous avez un projet web ou logiciel à Caen ou ailleurs ? Je suis disponible pour en discuter. Réponse sous 24h.</p>
                             <div class="space-y-6">
-                                <div class="flex items-center gap-3 text-slate-300">
-                                    <div class="w-10 h-10 bg-brand-900 rounded-full flex items-center justify-center text-brand-accent border border-slate-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <div class="flex items-center gap-4 text-slate-300">
+                                    <div class="w-12 h-12 bg-brand-900 rounded-full flex items-center justify-center text-brand-accent border border-brand-700 shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-slate-500 uppercase font-bold">Localisation</div>
-                                        <div>Caen, Normandie</div>
+                                        <div class="text-xs text-brand-accent uppercase font-bold tracking-wider mb-1">Localisation</div>
+                                        <div class="font-medium">Caen, Normandie</div>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-3 text-slate-300">
-                                    <div class="w-10 h-10 bg-brand-900 rounded-full flex items-center justify-center text-brand-accent border border-slate-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <div class="flex items-center gap-4 text-slate-300">
+                                    <div class="w-12 h-12 bg-brand-900 rounded-full flex items-center justify-center text-brand-accent border border-brand-700 shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-slate-500 uppercase font-bold">Statut</div>
-                                        <div>Freelance Disponible</div>
+                                        <div class="text-xs text-brand-accent uppercase font-bold tracking-wider mb-1">Statut</div>
+                                        <div class="font-medium">Freelance Disponible</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <form class="md:w-2/3 space-y-4" onsubmit="event.preventDefault(); alert('Merci ! Votre message a bien été simulé (Pas de backend connecté).');">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <form class="md:w-2/3 space-y-6" onsubmit="event.preventDefault(); alert('Merci ! Votre message a bien été simulé (Pas de backend connecté).');" novalidate>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div class="space-y-2">
-                                    <label for="nom" class="text-sm font-medium text-slate-300">Nom</label>
-                                    <input type="text" id="nom" class="w-full bg-brand-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600" placeholder="Votre nom" required>
+                                    <label for="nom" class="text-sm font-bold text-slate-300">Nom</label>
+                                    <input type="text" id="nom" name="nom" class="w-full bg-brand-900 border border-brand-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600 focus:border-transparent" placeholder="Votre nom" required aria-required="true">
                                 </div>
                                 <div class="space-y-2">
-                                    <label for="email" class="text-sm font-medium text-slate-300">Email</label>
-                                    <input type="email" id="email" class="w-full bg-brand-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600" placeholder="email@exemple.com" required>
+                                    <label for="email" class="text-sm font-bold text-slate-300">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full bg-brand-900 border border-brand-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600 focus:border-transparent" placeholder="email@exemple.com" required aria-required="true">
                                 </div>
                             </div>
                             <div class="space-y-2">
-                                <label for="message" class="text-sm font-medium text-slate-300">Message</label>
-                                <textarea id="message" rows="4" class="w-full bg-brand-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600" placeholder="Décrivez votre besoin..." required></textarea>
+                                <label for="message" class="text-sm font-bold text-slate-300">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full bg-brand-900 border border-brand-700 rounded-xl px-5 py-3.5 text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder-slate-600 focus:border-transparent resize-y" placeholder="Décrivez votre besoin..." required aria-required="true"></textarea>
                             </div>
-                            <button type="submit" class="w-full py-3 bg-brand-accent text-brand-900 font-bold rounded-lg hover:bg-yellow-400 transition-colors shadow-lg">Envoyer la demande</button>
+                            <button type="submit" class="w-full py-4 bg-brand-accent text-brand-900 font-bold text-lg rounded-xl hover:bg-brand-accentHover transition-colors shadow-lg shadow-brand-accent/10 transform active:scale-[0.98]">
+                                Envoyer la demande
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -421,15 +433,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black py-8 border-t border-slate-800 text-center mt-auto">
+    <footer class="bg-black py-10 border-t border-brand-800 text-center mt-auto" role="contentinfo">
         <div class="container mx-auto px-6">
             <p class="text-slate-500 text-sm flex items-center justify-center gap-2">
-                © <span id="year">2026</span> Robin Matelot - Développeur Web à Caen.
+                © <span id="year">2026</span> Robin Matelot - Développeur Web à Caen. Tous droits réservés.
             </p>
         </div>
     </footer>
 
-    <!-- JavaScript Ultra-Léger pour la navigation (Remplacement de React) -->
+    <!-- JavaScript Ultra-Léger -->
     <script>
         // Mise à jour automatique de l'année
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -437,46 +449,56 @@
         // Gestion du Menu Mobile
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
 
         mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
             mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', isMenuOpen);
+            // Change icon
+            if (isMenuOpen) {
+                 mobileMenuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+            } else {
+                 mobileMenuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
+            }
         });
 
-        // Fonction de Navigation SPA (Single Page Application)
+        // Navigation SPA
         function navigateTo(targetId) {
-            // 1. Fermer le menu mobile si ouvert
-            mobileMenu.classList.add('hidden');
+            // Fermer menu mobile
+            if(isMenuOpen) {
+                mobileMenuBtn.click();
+            }
 
-            // 2. Cacher toutes les sections
+            // Gestion des sections
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
             });
-
-            // 3. Afficher la section cible
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.add('active');
             }
 
-            // 4. Mettre à jour les liens actifs dans la navbar
+            // Gestion de l'état actif dans la nav (ARIA)
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active', 'text-brand-accent');
-                link.classList.add('text-slate-300'); // Reset color
+                link.classList.remove('text-brand-accent');
+                link.classList.add('text-slate-300');
+                link.removeAttribute('aria-current');
                 
                 if(link.getAttribute('data-target') === targetId) {
-                    link.classList.add('active', 'text-brand-accent');
+                    link.classList.add('text-brand-accent');
                     link.classList.remove('text-slate-300');
+                    link.setAttribute('aria-current', 'page');
                 }
             });
 
-            // 5. Scroll en haut de page
+            // Scroll Top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Initialisation : Marquer le lien "Accueil" comme actif
-        document.querySelector('.nav-link[data-target="accueil"]').classList.add('active', 'text-brand-accent');
+        // Init
+        document.querySelector('.nav-link[data-target="accueil"]').classList.add('text-brand-accent');
         document.querySelector('.nav-link[data-target="accueil"]').classList.remove('text-slate-300');
-
     </script>
 </body>
 </html>
