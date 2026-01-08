@@ -3,29 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Meta Tags Stratégiques -->
     <title>Robin Matelot - Développeur Web Freelance à Caen | Création Site Internet</title>
     <meta name="description" content="Robin Matelot, développeur web freelance à Caen. Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
     <meta name="keywords" content="développeur web caen, freelance informatique caen, site internet normandie, développeur react, robin matelot, création site web caen">
     <meta name="author" content="Robin Matelot">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://robinmatelot.fr">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://robinmatelot.fr/">
     <meta property="og:title" content="Robin Matelot - Développeur Web Freelance à Caen">
     <meta property="og:description" content="Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
     <meta property="og:image" content="https://robinmatelot.fr/assets/social-preview.png">
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://robinmatelot.fr/">
     <meta name="twitter:title" content="Robin Matelot - Développeur Web Freelance à Caen">
     <meta name="twitter:description" content="Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
     <meta name="twitter:image" content="https://robinmatelot.fr/assets/social-preview.png">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta name="theme-color" content="#0f172a">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Personnalisé -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,9 +72,12 @@
     </script>
 </head>
 <body class="bg-slate-900 text-slate-200 antialiased selection:bg-yellow-400 selection:text-slate-900">
+
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-yellow-400 text-slate-900 px-4 py-2 rounded font-bold z-50">
         Aller au contenu principal
     </a>
+
+    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-slate-900 shadow-lg py-4 border-b border-slate-800" aria-label="Menu principal">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <a href="#" onclick="navigateTo('accueil'); return false;" class="text-xl font-bold text-white flex items-center gap-2 hover:opacity-80 transition-opacity p-1" aria-label="Retour à l'accueil">
@@ -67,6 +86,7 @@
                 </span>
                 <span class="tracking-tight">Robin<span class="text-yellow-400">Matelot</span></span>
             </a>
+
             <ul class="hidden md:flex gap-8 items-center list-none m-0 p-0">
                 <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" aria-current="page" data-target="accueil">Accueil</a></li>
                 <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" data-target="expertise">Expertise</a></li>
@@ -76,11 +96,13 @@
                         Me contacter
                     </a>
                 </li>
-            </ul>>
+            </ul>
+
             <button id="mobile-menu-btn" class="md:hidden text-white p-3 -mr-3 rounded-lg hover:bg-slate-800 focus:ring-2 focus:ring-yellow-400" aria-label="Ouvrir le menu" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
             </button>
         </div>
+
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-2xl" role="region" aria-label="Menu mobile">
             <ul class="flex flex-col p-4 gap-2 list-none m-0">
                 <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link-mobile block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-slate-800 font-medium active:bg-slate-800 border-b border-slate-800/50" data-target="accueil">Accueil</a></li>
@@ -90,7 +112,10 @@
             </ul>
         </div>
     </nav>
+
     <main id="main-content" class="pt-20 min-h-screen">
+
+        <!-- === PAGE ACCUEIL === -->
         <div id="accueil" class="page-section active" role="tabpanel" aria-labelledby="tab-accueil">
             <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 z-0"></div>
@@ -159,6 +184,7 @@
             </section>
         </div>
 
+        <!-- === PAGE EXPERTISE === -->
         <div id="expertise" class="page-section" role="tabpanel" aria-labelledby="tab-expertise">
             <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
@@ -211,6 +237,8 @@
                 </div>
             </section>
         </div>
+
+        <!-- === PAGE PROJETS === -->
         <div id="projets" class="page-section" role="tabpanel" aria-labelledby="tab-projets">
             <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
@@ -238,7 +266,7 @@
                                 </div>
                             </div>
                         </article>
-                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
+                        <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
                                     <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Logiciel</span>
@@ -253,7 +281,7 @@
                                 </div>
                             </div>
                         </article>
-                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
+                        <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
                                     <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Frontend</span>
@@ -268,7 +296,7 @@
                                 </div>
                             </div>
                         </article>
-                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
+                        <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
                                     <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider bg-yellow-400/10 px-3 py-1.5 rounded-full">Algo</span>
@@ -288,6 +316,7 @@
             </section>
         </div>
 
+        <!-- === PAGE CONTACT === -->
         <div id="contact" class="page-section" role="tabpanel" aria-labelledby="tab-contact">
             <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
@@ -320,7 +349,7 @@
                                         <div class="font-medium">Freelance Disponible</div>
                                     </div>
                                 </div>
-                            
+                                
                                 <div class="pt-6 border-t border-slate-700">
                                     <div class="text-xs text-yellow-400 uppercase font-bold tracking-wider mb-3">Mes Réseaux</div>
                                     <div class="flex gap-4">
@@ -357,9 +386,51 @@
                     </div>
                 </div>
             </section>
+
+            <!-- SECTION FAQ AJOUTÉE -->
+            <section class="py-20 bg-slate-800 border-t border-slate-700">
+                <div class="container mx-auto px-6 max-w-4xl">
+                    <div class="text-center mb-12">
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Questions Fréquentes</h2>
+                        <p class="text-slate-400">Tout ce que vous devez savoir avant de lancer votre projet web.</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 rounded-xl p-6 border border-slate-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Combien coûte la création d'un site internet ?</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Le budget dépend de la complexité. Un site vitrine simple commence généralement autour de 800€, tandis qu'une application web complexe ou un e-commerce sur-mesure nécessitera un devis personnalisé. En tant que freelance à Caen, mes tarifs sont plus compétitifs qu'une agence traditionnelle.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-slate-900 rounded-xl p-6 border border-slate-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Combien de temps faut-il pour livrer un projet ?</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Pour un site vitrine standard, comptez entre 2 et 4 semaines. Pour un développement logiciel spécifique ou une application React complète, les délais varient de 1 à 3 mois selon les fonctionnalités requises.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-xl p-6 border border-slate-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Pourquoi choisir un développeur freelance plutôt qu'une agence ?</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Vous avez un interlocuteur unique (moi !), ce qui garantit une communication fluide et une meilleure compréhension de vos besoins. De plus, n'ayant pas les frais de structure d'une agence, je peux me concentrer pleinement sur la qualité du code et l'optimisation SEO.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-xl p-6 border border-slate-700">
+                            <h3 class="text-lg font-bold text-white mb-2">Intervenez-vous uniquement à Caen ?</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Bien que basé à Caen (Normandie) et privilégiant les rencontres locales, je travaille efficacement avec des clients dans toute la France grâce aux outils de collaboration à distance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
     </main>
+
+    <!-- Footer -->
     <footer class="bg-black py-10 border-t border-slate-800 text-center mt-auto" role="contentinfo">
         <div class="container mx-auto px-6">
             <p class="text-slate-500 text-sm flex items-center justify-center gap-2">
@@ -367,6 +438,8 @@
             </p>
         </div>
     </footer>
+
+    <!-- JavaScript Principal -->
     <script src="js/script.js"></script>
 </body>
 </html>
