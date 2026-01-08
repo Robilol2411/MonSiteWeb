@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO & Meta Tags Stratégiques -->
     <title>Robin Matelot - Développeur Web Freelance à Caen | Création Site Internet</title>
     <meta name="description" content="Robin Matelot, développeur web freelance à Caen. Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
     <meta name="keywords" content="développeur web caen, freelance informatique caen, site internet normandie, développeur react, robin matelot, création site web caen">
     <meta name="author" content="Robin Matelot">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://robinmatelot.fr">
-    
-    <!-- Favicon -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://robinmatelot.fr/">
+    <meta property="og:title" content="Robin Matelot - Développeur Web Freelance à Caen">
+    <meta property="og:description" content="Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
+    <meta property="og:image" content="https://robinmatelot.fr/assets/social-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://robinmatelot.fr/">
+    <meta name="twitter:title" content="Robin Matelot - Développeur Web Freelance à Caen">
+    <meta name="twitter:description" content="Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
+    <meta name="twitter:image" content="https://robinmatelot.fr/assets/social-preview.png">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta name="theme-color" content="#0f172a">
-
-    <!-- Tailwind CSS (Classes natives = Performance Max) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- CSS Personnalisé (Animations & SPA) -->
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Schema.org JSON-LD (SEO Local pour Caen) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -52,31 +50,23 @@
       "description": "Services de développement web et logiciel sur-mesure à Caen.",
       "sameAs": [
         "https://www.linkedin.com/in/robin-matelot-533543311/",
-        "https://github.com/robinmatelot"
+        "https://github.com/Robilol2411"
       ]
     }
     </script>
 </head>
 <body class="bg-slate-900 text-slate-200 antialiased selection:bg-yellow-400 selection:text-slate-900">
-
-    <!-- Lien d'évitement pour l'accessibilité -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-yellow-400 text-slate-900 px-4 py-2 rounded font-bold z-50">
         Aller au contenu principal
     </a>
-
-    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-slate-900 shadow-lg py-4 border-b border-slate-800" aria-label="Menu principal">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- Logo -->
             <a href="#" onclick="navigateTo('accueil'); return false;" class="text-xl font-bold text-white flex items-center gap-2 hover:opacity-80 transition-opacity p-1" aria-label="Retour à l'accueil">
                 <span class="text-yellow-400">
-                    <!-- Icone Ancre/Logo -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
                 </span>
                 <span class="tracking-tight">Robin<span class="text-yellow-400">Matelot</span></span>
             </a>
-
-            <!-- Desktop Menu -->
             <ul class="hidden md:flex gap-8 items-center list-none m-0 p-0">
                 <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" aria-current="page" data-target="accueil">Accueil</a></li>
                 <li><a href="#expertise" onclick="navigateTo('expertise'); return false;" class="nav-link text-sm font-semibold text-slate-300 hover:text-yellow-400 transition-colors py-2" data-target="expertise">Expertise</a></li>
@@ -86,15 +76,11 @@
                         Me contacter
                     </a>
                 </li>
-            </ul>
-
-            <!-- Mobile Toggle Button -->
+            </ul>>
             <button id="mobile-menu-btn" class="md:hidden text-white p-3 -mr-3 rounded-lg hover:bg-slate-800 focus:ring-2 focus:ring-yellow-400" aria-label="Ouvrir le menu" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
             </button>
         </div>
-
-        <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-2xl" role="region" aria-label="Menu mobile">
             <ul class="flex flex-col p-4 gap-2 list-none m-0">
                 <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link-mobile block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-slate-800 font-medium active:bg-slate-800 border-b border-slate-800/50" data-target="accueil">Accueil</a></li>
@@ -104,14 +90,9 @@
             </ul>
         </div>
     </nav>
-
-    <!-- Main Content -->
     <main id="main-content" class="pt-20 min-h-screen">
-
-        <!-- === PAGE ACCUEIL === -->
         <div id="accueil" class="page-section active" role="tabpanel" aria-labelledby="tab-accueil">
             <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-                <!-- Décoration de fond -->
                 <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 z-0"></div>
                 <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-400/5 rounded-full blur-3xl"></div>
                 
@@ -144,7 +125,6 @@
                 </div>
             </section>
 
-            <!-- Section Valeurs (Réassurance) -->
             <section class="py-24 bg-slate-800 border-t border-slate-700">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16">
@@ -153,7 +133,6 @@
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-                        <!-- Carte 1 -->
                         <article class="flex flex-col items-center text-center">
                             <div class="bg-slate-900 p-4 rounded-2xl text-yellow-400 mb-6 border border-slate-700 shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
@@ -161,7 +140,6 @@
                             <h3 class="text-xl font-bold text-white mb-3">Sur-Mesure</h3>
                             <p class="text-slate-400 leading-relaxed">Pas de templates tout faits. Je conçois des solutions adaptées exactement à vos besoins métier spécifiques.</p>
                         </article>
-                        <!-- Carte 2 -->
                         <article class="flex flex-col items-center text-center">
                             <div class="bg-slate-900 p-4 rounded-2xl text-yellow-400 mb-6 border border-slate-700 shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -169,7 +147,6 @@
                             <h3 class="text-xl font-bold text-white mb-3">Proximité</h3>
                             <p class="text-slate-400 leading-relaxed">Basé à Caen, je privilégie les relations humaines et suis disponible pour vous rencontrer en direct.</p>
                         </article>
-                        <!-- Carte 3 -->
                         <article class="flex flex-col items-center text-center">
                             <div class="bg-slate-900 p-4 rounded-2xl text-yellow-400 mb-6 border border-slate-700 shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -182,7 +159,6 @@
             </section>
         </div>
 
-        <!-- === PAGE EXPERTISE === -->
         <div id="expertise" class="page-section" role="tabpanel" aria-labelledby="tab-expertise">
             <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
@@ -195,7 +171,6 @@
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Skill 1 -->
                         <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                             <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -208,7 +183,6 @@
                                 <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> SEO & Performance Web</li>
                             </ul>
                         </div>
-                        <!-- Skill 2 -->
                         <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                             <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
@@ -221,7 +195,6 @@
                                 <li class="flex items-center gap-3 text-slate-300"><span class="text-yellow-400 font-bold">✓</span> Bases de données SQL</li>
                             </ul>
                         </div>
-                        <!-- Skill 3 -->
                         <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                             <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
@@ -238,8 +211,6 @@
                 </div>
             </section>
         </div>
-
-        <!-- === PAGE PROJETS === -->
         <div id="projets" class="page-section" role="tabpanel" aria-labelledby="tab-projets">
             <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
@@ -252,7 +223,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-                        <!-- Projet 1 -->
                         <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
@@ -268,7 +238,6 @@
                                 </div>
                             </div>
                         </article>
-                         <!-- Projet 2 -->
                          <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
@@ -284,7 +253,6 @@
                                 </div>
                             </div>
                         </article>
-                         <!-- Projet 3 -->
                          <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
@@ -300,7 +268,6 @@
                                 </div>
                             </div>
                         </article>
-                         <!-- Projet 4 -->
                          <article class="flex flex-col h-full bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-400 transition-all duration-300 hover:shadow-2xl group">
                             <div class="p-8 flex-grow">
                                 <div class="flex justify-between items-start mb-4">
@@ -321,7 +288,6 @@
             </section>
         </div>
 
-        <!-- === PAGE CONTACT === -->
         <div id="contact" class="page-section" role="tabpanel" aria-labelledby="tab-contact">
             <section class="py-20 bg-slate-900">
                 <div class="container mx-auto px-6">
@@ -354,16 +320,13 @@
                                         <div class="font-medium">Freelance Disponible</div>
                                     </div>
                                 </div>
-                                
-                                <!-- Social Links Added Here -->
+                            
                                 <div class="pt-6 border-t border-slate-700">
                                     <div class="text-xs text-yellow-400 uppercase font-bold tracking-wider mb-3">Mes Réseaux</div>
                                     <div class="flex gap-4">
-                                        <!-- LinkedIn -->
                                         <a href="https://www.linkedin.com/in/robin-matelot-533543311/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-slate-300 hover:text-yellow-400 hover:border hover:border-yellow-400 transition-all" aria-label="Profil LinkedIn">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                                         </a>
-                                        <!-- GitHub -->
                                         <a href="https://github.com/Robilol2411" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-slate-300 hover:text-yellow-400 hover:border hover:border-yellow-400 transition-all" aria-label="Profil GitHub">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                                         </a>
@@ -397,8 +360,6 @@
         </div>
 
     </main>
-
-    <!-- Footer -->
     <footer class="bg-black py-10 border-t border-slate-800 text-center mt-auto" role="contentinfo">
         <div class="container mx-auto px-6">
             <p class="text-slate-500 text-sm flex items-center justify-center gap-2">
@@ -406,8 +367,6 @@
             </p>
         </div>
     </footer>
-
-    <!-- JavaScript Principal -->
     <script src="js/script.js"></script>
 </body>
 </html>
