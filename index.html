@@ -7,27 +7,34 @@
     <!-- SEO & Meta Tags Stratégiques -->
     <title>Robin Matelot - Développeur Web Freelance à Caen | Création Site Internet</title>
     <meta name="description" content="Robin Matelot, développeur web freelance à Caen. Expert React, C++, Python. Création de sites sur-mesure performants et accessibles. Devis gratuit.">
-    <meta name="keywords" content="développeur web caen, freelance informatique caen, site internet normandie, développeur react, robin matelot">
+    <meta name="keywords" content="développeur web caen, freelance informatique caen, site internet normandie, développeur react, robin matelot, création site web caen">
     <meta name="author" content="Robin Matelot">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://robinmatelot.fr">
     
-    <!-- Tailwind CSS (CDN direct avec classes natives pour éviter tout bug de config) -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Tailwind CSS (Classes natives = Performance Max) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts Optimisé -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Schema.org JSON-LD (SEO Local) -->
+    <!-- CSS Personnalisé (Animations & SPA) -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Schema.org JSON-LD (SEO Local pour Caen) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "Robin Matelot",
       "url": "https://robinmatelot.fr",
-      "image": "https://robinmatelot.fr/logo.png",
+      "image": "https://robinmatelot.fr/assets/logo.png",
       "jobTitle": "Développeur Web Freelance",
       "address": {
         "@type": "PostalAddress",
@@ -36,57 +43,30 @@
         "postalCode": "14000",
         "addressCountry": "FR"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "49.1828",
+        "longitude": "-0.3706"
+      },
       "priceRange": "€€",
       "description": "Services de développement web et logiciel sur-mesure à Caen."
     }
     </script>
-
-    <style>
-        /* Styles critiques et Reset */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #0f172a; /* Fallback solide immédiat */
-            color: #e2e8f0;
-            overflow-x: hidden; 
-        }
-        
-        /* Gestion SPA (Single Page Application) */
-        .page-section { 
-            display: none; 
-            opacity: 0; 
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        .page-section.active { 
-            display: block; 
-        }
-
-        /* Accessibilité : Focus visible en jaune */
-        *:focus-visible {
-            outline: 2px solid #facc15;
-            outline-offset: 2px;
-        }
-
-        /* Utilitaires d'animation */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
-    </style>
 </head>
 <body class="bg-slate-900 text-slate-200 antialiased selection:bg-yellow-400 selection:text-slate-900">
 
-    <!-- Navigation (Skip Link pour a11y) -->
+    <!-- Lien d'évitement pour l'accessibilité -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-yellow-400 text-slate-900 px-4 py-2 rounded font-bold z-50">
         Aller au contenu principal
     </a>
 
-    <!-- Navbar: Fond 100% opaque Slate-900 -->
+    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-slate-900 shadow-lg py-4 border-b border-slate-800" aria-label="Menu principal">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <!-- Logo -->
             <a href="#" onclick="navigateTo('accueil'); return false;" class="text-xl font-bold text-white flex items-center gap-2 hover:opacity-80 transition-opacity p-1" aria-label="Retour à l'accueil">
                 <span class="text-yellow-400">
+                    <!-- Icone Ancre/Logo -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
                 </span>
                 <span class="tracking-tight">Robin<span class="text-yellow-400">Matelot</span></span>
@@ -104,13 +84,13 @@
                 </li>
             </ul>
 
-            <!-- Mobile Toggle Button (48px target size) -->
+            <!-- Mobile Toggle Button -->
             <button id="mobile-menu-btn" class="md:hidden text-white p-3 -mr-3 rounded-lg hover:bg-slate-800 focus:ring-2 focus:ring-yellow-400" aria-label="Ouvrir le menu" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
             </button>
         </div>
 
-        <!-- Mobile Menu Overlay: Fond 100% opaque et solide -->
+        <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-2xl" role="region" aria-label="Menu mobile">
             <ul class="flex flex-col p-4 gap-2 list-none m-0">
                 <li><a href="#accueil" onclick="navigateTo('accueil'); return false;" class="nav-link-mobile block w-full text-left py-4 px-4 rounded-lg text-slate-200 hover:bg-slate-800 font-medium active:bg-slate-800 border-b border-slate-800/50" data-target="accueil">Accueil</a></li>
@@ -408,81 +388,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript Ultra-Léger -->
-    <script>
-        // Mise à jour automatique de l'année
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Gestion du Menu Mobile
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-
-        mobileMenuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', isMenuOpen);
-            // Change icon
-            if (isMenuOpen) {
-                 mobileMenuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-            } else {
-                 mobileMenuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
-            }
-        });
-
-        // Navigation SPA
-        function navigateTo(targetId) {
-            // Fermer menu mobile
-            if(isMenuOpen) {
-                mobileMenuBtn.click();
-            }
-
-            // Gestion des sections
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-
-            // Gestion de l'état actif dans la nav Desktop (ARIA)
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('text-yellow-400');
-                link.classList.add('text-slate-300');
-                link.removeAttribute('aria-current');
-                
-                if(link.getAttribute('data-target') === targetId) {
-                    link.classList.add('text-yellow-400');
-                    link.classList.remove('text-slate-300');
-                    link.setAttribute('aria-current', 'page');
-                }
-            });
-
-            // Gestion de l'état actif dans la nav Mobile (Ajouté pour fixer le problème "tout blanc")
-            document.querySelectorAll('.nav-link-mobile').forEach(link => {
-                link.classList.remove('text-yellow-400');
-                link.classList.add('text-slate-200');
-                
-                if(link.getAttribute('data-target') === targetId) {
-                    link.classList.add('text-yellow-400');
-                    link.classList.remove('text-slate-200');
-                }
-            });
-
-            // Scroll Top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Init
-        document.querySelector('.nav-link[data-target="accueil"]').classList.add('text-yellow-400');
-        document.querySelector('.nav-link[data-target="accueil"]').classList.remove('text-slate-300');
-        // Init Mobile
-        const activeMobile = document.querySelector('.nav-link-mobile[data-target="accueil"]');
-        if(activeMobile) {
-            activeMobile.classList.add('text-yellow-400');
-            activeMobile.classList.remove('text-slate-200');
-        }
-    </script>
+    <!-- JavaScript Principal -->
+    <script src="js/script.js"></script>
 </body>
 </html>
