@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Matelot — Portfolio</title>
+    <meta name="description" content="Portfolio de Robin Matelot, étudiant en informatique passionné par la Data, Cyber et IA.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ══════════════════ NAVBAR ══════════════════ -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>RM<span class="logo-bracket">/&gt;</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about"    class="nav-link">À propos</a>
+                <a href="#skills"   class="nav-link">Compétences</a>
+                <a href="#projects" class="nav-link">Projets</a>
+                <a href="#contact"  class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══════════════════ HERO ══════════════════ -->
+    <section id="hero">
+        <canvas id="particleCanvas"></canvas>
+        <div class="hero-bg-shapes">
+            <div class="bg-shape shape-1"></div>
+            <div class="bg-shape shape-2"></div>
+            <div class="bg-shape shape-3"></div>
+        </div>
+
+        <div class="hero-layout">
+            <div class="hero-content">
+                <div class="hero-badge fade-up">
+                    <span class="badge-pulse"></span>
+                    Disponible pour des projets
+                </div>
+                <h1 class="hero-title fade-up d1">
+                    <span class="title-line-1">Robin</span>
+                    <span class="title-line-2">Matelot</span>
+                </h1>
+                <div class="hero-typewriter fade-up d2">
+                    <span class="typewriter-prefix">›_ </span>
+                    <span id="typewriter-text"></span>
+                    <span class="typewriter-cursor" id="cursor">|</span>
+                </div>
+                <p class="hero-desc fade-up d3">
+                    Étudiant en informatique, passionné par la création.<br>
+                    Spécialisé en <span class="hl-yellow">Data</span>, <span class="hl-yellow">Cybersécurité</span><br>
+                    et <span class="hl-yellow">Intelligence Artificielle</span>.
+                </p>
+                <div class="hero-cta fade-up d4">
+                    <a href="#projects" class="btn btn-primary">
+                        Découvrir mes projets
+                        <i class="fas fa-arrow-down btn-icon"></i>
+                    </a>
+                    <a href="https://github.com/Robilol2411" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual fade-up d3">
+                <div class="code-card">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-yellow-alt"></span>
+                        </div>
+                        <span class="code-filename"><i class="fab fa-js-square"></i> portfolio.js</span>
+                    </div>
+                    <div class="code-body">
+<pre><code><span class="c-kw">const</span> <span class="c-var">developer</span> = {
+  <span class="c-key">name</span>: <span class="c-str">"Robin Matelot"</span>,
+  <span class="c-key">focus</span>: [<span class="c-str">"Data"</span>, <span class="c-str">"Cyber"</span>, <span class="c-str">"IA"</span>],
+  <span class="c-key">hobbies</span>: [<span class="c-str">"Game Dev"</span>],
+  <span class="c-key">status</span>: <span class="c-str">"Learning 🚀"</span>
+};</code></pre>
+                    </div>
+                </div>
+                <div class="floating-badge badge-js fade-up d4">
+                    <i class="fab fa-js-square"></i> JS
+                </div>
+                <div class="floating-badge badge-python fade-up d5">
+                    <i class="fab fa-python"></i> Python
+                </div>
+                <div class="floating-badge badge-godot fade-up d4">
+                    🎮 Godot
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ ABOUT (RESUME) ══════════════════ -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">01. À PROPOS</span>
+                <h2 class="section-title">En quelques <span class="accent">mots</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p class="about-p">
+                        Passionné par l'informatique depuis toujours, je combine mes études avec des projets personnels créatifs. Mon parcours est guidé par la curiosité et l'envie de comprendre les systèmes complexes.
+                    </p>
+                    <a href="about.html" class="btn btn-secondary btn-sm">
+                        En savoir plus <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                <div class="about-stats reveal reveal-right">
+                    <div class="stat-item"><span class="stat-num yellow">10+</span><span class="stat-lbl">Techs</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item"><span class="stat-num yellow">🎮</span><span class="stat-lbl">Game Dev</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ SKILLS (RESUME) ══════════════════ -->
+    <section id="skills" class="section alt-bg">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">02. COMPÉTENCES</span>
+                <h2 class="section-title">Mon <span class="accent">expertises</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-container reveal">
+                <div class="skill-group">
+                    <div class="skill-group-header">
+                        <i class="fas fa-code skill-group-icon"></i>
+                        <h3>Langages Maîtrisés</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">Python</div>
+                        <div class="skill-tag">Java</div>
+                        <div class="skill-tag">PHP</div>
+                        <div class="skill-tag">React</div>
+                    </div>
+                    <a href="skills.html" class="btn btn-secondary btn-sm" style="margin-top: 2rem;">
+                        Voir tout le stack <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ TIMELINE ══════════════════ -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">03. TIMELINE</span>
+                <h2 class="section-title">Mon parcours <span class="accent">chronologique</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="timeline">
+                <!-- Item 1 (Left) -->
+                <div class="timeline-item timeline-item-left reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">MARS 2024</div>
+                    <div class="timeline-content">
+                        <h3>CINEMAX</h3>
+                        <p>Lancement de la plateforme interactive de catalogue de films inspirée de Netflix. Utilisation intensive de TMDB API et PHP.</p>
+                        <div class="timeline-tags">
+                            <span class="tech-pill">PHP</span>
+                            <span class="tech-pill">JS</span>
+                            <span class="tech-pill">API</span>
+                        </div>
+                        <a href="projects.html" class="project-cta-link">Détails <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Right) -->
+                <div class="timeline-item timeline-item-right reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">FÉVRIER 2024</div>
+                    <div class="timeline-content">
+                        <h3>Game Dev Explorer</h3>
+                        <p>Développement de prototypes de mini-jeux avec Godot Engine pour explorer les mécaniques physiques et l'IA simple.</p>
+                        <div class="timeline-tags">
+                            <span class="tech-pill">Godot</span>
+                            <span class="tech-pill">GDScript</span>
+                        </div>
+                        <a href="projects.html" class="project-cta-link">Détails <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Item 3 (Left) -->
+                <div class="timeline-item timeline-item-left reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">JANVIER 2024</div>
+                    <div class="timeline-content">
+                        <h3>Cyber Security Lab</h3>
+                        <p>Mise en place d'un environnement de test pour l'analyse de vulnérabilités et la compréhension des protocoles réseau.</p>
+                        <div class="timeline-tags">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Linux</span>
+                        </div>
+                        <a href="about.html" class="project-cta-link">À propos <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="timeline-bottom-arrow"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="projects.html" class="btn btn-primary">
+                    Voir tous les projets
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ CONTACT ══════════════════ -->
+    <section id="contact" class="section alt-bg">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">04. CONTACT</span>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-wrapper reveal">
+                <p class="contact-intro">N'hésite pas à me contacter ou à suivre mes travaux sur GitHub.</p>
+                <div class="contact-cta">
+                    <a href="contact.html" class="btn btn-primary btn-lg">Me contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════ FOOTER ══════════════════ -->
+    <footer id="footer">
+        <div class="container footer-inner">
+            <div class="footer-logo">
+                <span class="logo-bracket">&lt;</span>RM<span class="logo-bracket">/&gt;</span>
+            </div>
+            <p class="footer-text">
+                Robin <span class="yellow">Matelot</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
