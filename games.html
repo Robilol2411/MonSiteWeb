@@ -137,10 +137,16 @@
             z-index: 5;
         }
 
-        .p1-pawn { background-color: #3b82f6; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .p2-pawn { background-color: #ef4444; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .p1-pawn { background-color: #ffffff; border: 2px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .p2-pawn { background-color: #1a1a1a; border: 2px solid #555; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .p1-queen { background: linear-gradient(135deg, #3b82f6, #93c5fd); border: 2px solid #fff; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); border-radius: 50%; }
         .p2-queen { background: linear-gradient(135deg, #ef4444, #f87171); border: 2px solid #fff; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); border-radius: 50%; }
+        
+        .cell-red { background-color: #ad073c !important; }
+        .cell-blue { background-color: #1db9f2 !important; }
+        .cell-yellow { background-color: #ebe238 !important; }
+        .cell-green { background-color: #18b557 !important; }
+        .cell-red:hover, .cell-blue:hover, .cell-yellow:hover, .cell-green:hover { filter: brightness(1.2); }
 
         /* Terminal Emulator */
         #game-terminal {
@@ -229,6 +235,7 @@
                 <button class="game-btn active" id="btn-snort" onclick="switchGame('snort')">Snort</button>
                 <button class="game-btn" id="btn-dodgem" onclick="switchGame('dodgem')">Dodgem</button>
                 <button class="game-btn" id="btn-reines" onclick="switchGame('reines')">Reines</button>
+                <button class="game-btn" id="btn-katarenga" onclick="switchGame('katarenga')">Katarenga</button>
                 <button class="game-btn" id="btn-pokemon" onclick="switchGame('pokemon')">Pokémon C-Dev</button>
             </div>
 
@@ -321,6 +328,15 @@
                 <div class="rules-item"><span class="rules-dot">•</span><span><strong>Concept :</strong> Explorez le monde, capturez des Pokémon et soignez-les.</span></div>
                 <div class="rules-item"><span class="rules-dot">•</span><span><strong>Commandes :</strong> Tapez les chiffres (1, 2, 3...) dans le terminal en bas.</span></div>
                 <div class="rules-item"><span class="rules-dot">•</span><span><strong>Combat :</strong> Gérez vos HP et utilisez vos capacités pour gagner.</span></div>
+            `,
+            katarenga: `
+                <div class="rules-item"><span class="rules-dot">•</span><span><strong>Mouvements :</strong> Dépendent de la couleur de la case de DÉPART.</span></div>
+                <div class="rules-item"><span class="rules-dot">•</span><span><strong>Couleurs :</strong> Rouge (Roi), Vert (Fou), Jaune (Cavalier), Bleu (Tour).</span></div>
+                <div class="rules-item"><span class="rules-dot">•</span><span><strong>Victoire :</strong> Amenez 2 pions sur la ligne opposée ou capturez l'adversaire.</span></div>
+                <div class="rules-item" style="margin-top: 10px; color: var(--accent-yellow); font-size: 0.8rem; font-style: italic;">
+                    <span class="rules-dot">i</span>
+                    <span>Note : Cette démo est une reconstitution du fonctionnement de base. Le projet original en Python est disponible sur <a href="https://github.com/Robilol2411/Projet-fin-annee-L1" target="_blank" style="color: inherit; text-decoration: underline;">GitHub</a>.</span>
+                </div>
             `
         };
 
@@ -354,7 +370,8 @@
                 info.style.display = 'flex';
                 terminal.style.display = 'none';
                 termInput.style.display = 'none';
-                boardSize = (game === 'dodgem' ? 3 : 6);
+                if (game === 'katarenga') boardSize = 8;
+                else boardSize = (game === 'dodgem' ? 3 : 6);
                 document.getElementById('size-setting').style.display = (game === 'reines' ? 'flex' : 'none');
                 resetGame();
             }
@@ -393,7 +410,28 @@
                 boardState[n-1][0] = 2; // Q1
                 for(let y=1; y<n/2; y++) boardState[n-1][y] = 1;
                 boardState[0][n-1] = 4; // Q2
+            } else if (currentGame === 'katarenga') {
+                for(let i=0; i<8; i++) {
+                    boardState[i][0] = 3; // J2 pions
+                    boardState[i][7] = 1; // J1 pions
+                }
             }
+        }
+
+        const KATARENGA_COLORS = [
+            [2, 2, 4, 4, 2, 2, 3, 3],
+            [2, 2, 4, 4, 2, 2, 3, 3],
+            [1, 1, 3, 3, 1, 4, 4, 1],
+            [1, 1, 3, 3, 1, 4, 4, 1],
+            [2, 2, 4, 4, 2, 1, 3, 4],
+            [2, 2, 4, 4, 2, 1, 1, 4],
+            [1, 1, 3, 3, 3, 4, 2, 1],
+            [1, 1, 3, 3, 4, 3, 3, 2]
+        ]; // 1:Green, 2:Red, 3:Yellow, 4:Blue
+
+        function getKatarengaColorClass(x, y) {
+            const c = KATARENGA_COLORS[y][x];
+            return {1: 'cell-green', 2: 'cell-red', 3: 'cell-yellow', 4: 'cell-blue'}[c];
         }
 
         function renderBoard() {
@@ -404,6 +442,7 @@
                 for (let x = 0; x < boardSize; x++) {
                     const cell = document.createElement('div');
                     cell.className = 'cell';
+                    if (currentGame === 'katarenga') cell.classList.add(getKatarengaColorClass(x, y));
                     if (selectedCell && selectedCell.x === x && selectedCell.y === y) cell.classList.add('selected');
                     if (possibleMoves.some(m => m.nx === x && m.ny === y)) cell.classList.add('possible-move');
                     const val = boardState[x][y];
@@ -427,6 +466,7 @@
             if (currentGame === 'snort') handleSnortClick(x, y);
             else if (currentGame === 'dodgem') handleDodgemClick(x, y);
             else if (currentGame === 'reines') handleReinesClick(x, y);
+            else if (currentGame === 'katarenga') handleKatarengaClick(x, y);
             renderBoard();
         }
 
@@ -597,6 +637,102 @@
             if (p2 <= 2) { endGame(1); return true; }
             if (p1 <= 2) { endGame(2); return true; }
             return false;
+        }
+
+        // --- KATARENGA ---
+        function handleKatarengaClick(x, y) {
+            if (gameMode === 'ia' && currentPlayer === 2) return;
+            const pId = currentPlayer === 1 ? 1 : 3;
+            const val = boardState[x][y];
+            if (selectedCell) {
+                let {x: ax, y: ay} = selectedCell;
+                if (canKatarengaMove(ax, ay, x, y, pId)) {
+                    boardState[x][y] = pId;
+                    boardState[ax][ay] = 0;
+                    selectedCell = null; possibleMoves = [];
+                    if (!checkKatarengaWin()) { nextTurn(); if (gameMode === 'ia') setTimeout(iaTurnKatarenga, 600); }
+                } else if (val === pId) selectKatarengaPiece(x, y);
+                else { selectedCell = null; possibleMoves = []; }
+            } else if (val === pId) selectKatarengaPiece(x, y);
+        }
+
+        function selectKatarengaPiece(x, y) {
+            selectedCell = {x, y}; possibleMoves = [];
+            for(let nx=0; nx<8; nx++) for(let ny=0; ny<8; ny++) {
+                if (canKatarengaMove(x, y, nx, ny, currentPlayer === 1 ? 1 : 3)) possibleMoves.push({nx, ny});
+            }
+        }
+
+        function canKatarengaMove(ax, ay, nx, ny, pId) {
+            if (nx < 0 || nx >= 8 || ny < 0 || ny >= 8) return false;
+            if (boardState[nx][ny] === pId) return false; // Can't take own piece
+            if (ax === nx && ay === ny) return false;
+
+            const color = KATARENGA_COLORS[ay][ax]; // Movement depends on starting cell color
+            const dx = nx - ax, dy = ny - ay;
+            const adx = Math.abs(dx), ady = Math.abs(dy);
+
+            if (color === 2) { // Red: King (1 square)
+                return adx <= 1 && ady <= 1;
+            } else if (color === 1) { // Green: Bishop (Diagonal)
+                if (adx !== ady) return false;
+                return isPathClear(ax, ay, nx, ny, color);
+            } else if (color === 3) { // Yellow: Knight (L-shape)
+                return (adx === 1 && ady === 2) || (adx === 2 && ady === 1);
+            } else if (color === 4) { // Blue: Rook (Straight)
+                if (dx !== 0 && dy !== 0) return false;
+                return isPathClear(ax, ay, nx, ny, color);
+            }
+            return false;
+        }
+
+        function isPathClear(ax, ay, nx, ny, startColor) {
+            let sx = nx > ax ? 1 : (nx < ax ? -1 : 0);
+            let sy = ny > ay ? 1 : (ny < ay ? -1 : 0);
+            let tx = ax + sx, ty = ay + sy;
+            while (tx !== nx || ty !== ny) {
+                if (boardState[tx][ty] !== 0) return false;
+                // Katarenga rule: Cannot pass through cell of same color
+                if (currentGame === 'katarenga' && startColor && KATARENGA_COLORS[ty][tx] === startColor) return false;
+                tx += sx; ty += sy;
+            }
+            return true;
+        }
+
+        function checkKatarengaWin() {
+            let p1Count = 0, p2Count = 0;
+            let p1Home = 0, p2Home = 0;
+            for(let i=0; i<8; i++) {
+                if (boardState[i][0] === 1) p1Home++; // J1 reached top
+                if (boardState[i][7] === 3) p2Home++; // J2 reached bottom
+            }
+            if (p1Home >= 2) { endGame(1); return true; }
+            if (p2Home >= 2) { endGame(2); return true; }
+
+            for(let x=0; x<8; x++) for(let y=0; y<8; y++) {
+                if (boardState[x][y] === 1) p1Count++;
+                if (boardState[x][y] === 3) p2Count++;
+            }
+            if (p2Count <= 1) { endGame(1); return true; }
+            if (p1Count <= 1) { endGame(2); return true; }
+            return false;
+        }
+
+        function iaTurnKatarenga() {
+            let moves = [];
+            for(let x=0; x<8; x++) for(let y=0; y<8; y++) if (boardState[x][y] === 3) {
+                for(let nx=0; nx<8; nx++) for(let ny=0; ny<8; ny++) {
+                    if (canKatarengaMove(x, y, nx, ny, 3)) moves.push({ax:x, ay:y, nx, ny});
+                }
+            }
+            if (moves.length > 0) {
+                // Priority: reach home or capture
+                let best = moves.find(m => m.ny === 7 || boardState[m.nx][m.ny] === 1);
+                let m = best || moves[Math.floor(Math.random() * moves.length)];
+                boardState[m.nx][m.ny] = 3; boardState[m.ax][m.ay] = 0;
+            }
+            if(!checkKatarengaWin()) nextTurn();
+            renderBoard();
         }
 
         // --- POKEMON ---
