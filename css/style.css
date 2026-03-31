@@ -7,10 +7,10 @@
     --text-primary: #1a1a1a;
     --text-secondary: #4a4a4a;
     --text-muted: #6c757d;
-    --accent-yellow: #f1c40f;
-    --accent-yellow-alt: #e67e22; /* Jaune orangé pour remplacer le vert */
-    --accent-yellow-soft: rgba(241, 196, 15, 0.1);
-    --accent-yellow-alt-soft: rgba(230, 126, 34, 0.1);
+    --accent-yellow: #d4ac0d; /* Slightly darker for better contrast on white */
+    --accent-yellow-alt: #ca6f1e;
+    --accent-yellow-soft: rgba(212, 172, 13, 0.1);
+    --accent-yellow-alt-soft: rgba(202, 111, 30, 0.1);
     --border-color: rgba(0, 0, 0, 0.1);
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.5);
@@ -212,6 +212,19 @@ img {
     height: 2px;
     background-color: var(--text-primary);
     transition: var(--transition);
+    transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ══════════════════ HERO SECTION ══════════════════ */
@@ -1228,7 +1241,16 @@ img {
         box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     }
     
-    .nav-links.active { right: 0; }
+    .nav-links.active { 
+        right: 0;
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .nav-link {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+    }
     
     .hero-title { font-size: 3.5rem; }
     .interest-grid { grid-template-columns: 1fr; }

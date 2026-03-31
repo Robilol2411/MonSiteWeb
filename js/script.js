@@ -1,49 +1,70 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const htmlElement = document.documentElement;
+
+    /* ══════════════════ UTILS ══════════════════ */
+    const debounce = (fn, delay = 100) => {
+        let timeoutId;
+        return (...args) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => fn.apply(this, args), delay);
+        };
+    };
+
     /* ══════════════════ NAVIGATION & MOBILE MENU ══════════════════ */
     const navbar = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     const navLinkItems = document.querySelectorAll('.nav-link');
 
-    // Scroll Effect (Don't force if already scrolled class is there from HTML)
-    window.addEventListener('scroll', () => {
-        if (!navbar.classList.contains('scrolled-fixed')) { // Optional: if we want to fix it on subpages
+    // Scroll Effect with Throttle-like check
+    const handleScroll = () => {
+        if (!navbar.classList.contains('scrolled-fixed')) {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else if (!navbar.hasAttribute('data-fixed')) {
                 navbar.classList.remove('scrolled');
             }
         }
-    });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     // Toggle Mobile Menu
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
+        const toggleMenu = (forceClose = false) => {
             const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-            hamburger.setAttribute('aria-expanded', !isExpanded);
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('open');
-        });
+            const shouldOpen = forceClose ? false : !isExpanded;
+            
+            hamburger.setAttribute('aria-expanded', shouldOpen);
+            navLinks.classList.toggle('active', shouldOpen);
+            hamburger.classList.toggle('open', shouldOpen);
+            
+            // Prevent scrolling when menu is open
+            document.body.style.overflow = shouldOpen ? 'hidden' : '';
+        };
 
-        // Close menu on click
+        hamburger.addEventListener('click', () => toggleMenu());
+
+        // Close menu on link click
         navLinkItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                hamburger.classList.remove('open');
-            });
+            item.addEventListener('click', () => toggleMenu(true));
         });
     }
 
     /* ══════════════════ THEME TOGGLE ══════════════════ */
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
-    const htmlElement = document.documentElement;
+
+    const updateThemeIcon = (theme) => {
+        if (themeIcon) {
+            themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        }
+    };
 
     // Check for saved theme
     const savedTheme = localStorage.getItem('theme') || 'dark';
     htmlElement.setAttribute('data-theme', savedTheme);
-    if (themeIcon) updateThemeIcon(savedTheme);
+    updateThemeIcon(savedTheme);
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -52,12 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            if (themeIcon) updateThemeIcon(newTheme);
+            updateThemeIcon(newTheme);
+            
+            // Event for particles
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
         });
-    }
-
-    function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
     }
 
     /* ══════════════════ TYPEWRITER EFFECT ══════════════════ */
@@ -102,35 +122,38 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     }
 
-    /* ══════════════════ SCROLL REVEAL ══════════════════ */
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const revealOnScroll = () => {
-        revealElements.forEach(el => {
-            const elementTop = el.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight * 0.9) {
-                el.classList.add('active');
-            }
-        });
+    /* ══════════════════ INTERSECTION OBSERVER (REVEAL) ══════════════════ */
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
     };
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Optional: stop observing once revealed
+                // revealObserver.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     /* ══════════════════ PARTICLE CANVAS ══════════════════ */
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
+        let animationFrameId;
 
-        function resizeCanvas() {
+        const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        }
+            initParticles();
+        };
 
-        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('resize', debounce(resizeCanvas, 200));
         resizeCanvas();
 
         class Particle {
@@ -180,18 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.update();
                 p.draw();
             });
-            requestAnimationFrame(animateParticles);
+            animationFrameId = requestAnimationFrame(animateParticles);
         }
 
-        initParticles();
         animateParticles();
         
-        // Update colors when theme changes
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                particles.forEach(p => p.updateColor());
-            });
-        }
+        window.addEventListener('themeChanged', () => {
+            particles.forEach(p => p.updateColor());
+        });
     }
 
     /* ══════════════════ SMOOTH SCROLL FOR ANCHORS ══════════════════ */
@@ -214,4 +233,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Interactive Games — Robin Matelot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .games-layout {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-interface-container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .settings-bar {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--bg-tertiary);
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+        }
+
+        .setting-item { display: flex; align-items: center; gap: 8px; }
+
+        select, button.setting-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .turn-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .turn-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-player1 { background-color: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
+        .dot-player2 { background-color: #ef4444; box-shadow: 0 0 10px #ef4444; }
+
+        .board-wrapper {
+            background-color: var(--bg-tertiary);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        #game-board {
+            display: grid;
+            gap: 8px;
+            background-color: var(--border-color);
+            padding: 8px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        /* Cells */
+        .cell {
+            width: 60px;
+            height: 60px;
+            background-color: var(--bg-primary);
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .cell:hover { background-color: var(--bg-secondary); z-index: 2; }
+
+        .cell.possible-move::after {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background-color: rgba(38, 183, 57, 0.5);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .cell.selected {
+            background-color: rgba(255, 222, 87, 0.15);
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .piece {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .p1-pawn { background-color: #3b82f6; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .p2-pawn { background-color: #ef4444; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .p1-queen { 
+            background: linear-gradient(135deg, #3b82f6, #93c5fd); 
+            border: 2px solid #fff;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            border-radius: 50%; 
+        }
+        .p2-queen { 
+            background: linear-gradient(135deg, #ef4444, #f87171); 
+            border: 2px solid #fff;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+            border-radius: 50%;
+        }
+
+        .rules-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 900px;
+            text-align: left;
+        }
+
+        .rules-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--accent-yellow);
+        }
+
+        .rules-item { margin-bottom: 0.4rem; display: flex; gap: 10px; font-size: 0.9rem; }
+        .rules-dot { color: var(--accent-yellow); }
+
+        .game-selector { display: flex; gap: 1rem; margin-bottom: 2rem; }
+
+        .game-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .game-btn.active {
+            background-color: var(--accent-yellow-soft);
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        pre {
+            background: transparent;
+            color: #d4d4d4;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar" class="scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>RM<span class="logo-bracket">/&gt;</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="projects.html" class="nav-link">Projets</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="games-layout">
+        <div class="container" style="text-align: center;">
+            <span class="section-label">INTERACTIVE LAB</span>
+            <h1 class="section-title">Jeux <span class="accent">Interactifs</span></h1>
+            
+            <div class="game-selector">
+                <button class="game-btn active" id="btn-snort" onclick="switchGame('snort')">Snort</button>
+                <button class="game-btn" id="btn-dodgem" onclick="switchGame('dodgem')">Dodgem</button>
+                <button class="game-btn" id="btn-reines" onclick="switchGame('reines')">Reines</button>
+            </div>
+
+            <div class="game-interface-container">
+                <div class="settings-bar">
+                    <div class="setting-item" id="size-setting">
+                        <i class="fas fa-th-large"></i> Taille : 
+                        <select id="board-size-select" onchange="updateBoardSize(this.value)">
+                            <option value="6">6x6</option>
+                            <option value="8">8x8</option>
+                            <option value="10">10x10</option>
+                        </select>
+                    </div>
+                    <div class="setting-item" id="mode-setting">
+                        <i class="fas fa-users"></i> Mode : 
+                        <select id="game-mode-select" onchange="updateGameMode(this.value)">
+                            <option value="ia" selected>Joueur vs IA</option>
+                            <option value="pvp">Joueur vs Joueur</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="game-header">
+                    <div class="turn-indicator" id="turn-indicator">
+                        <span class="turn-dot dot-player1"></span>
+                        <span id="player-name">Joueur 1</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem;" onclick="resetGame()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rules-card">
+                    <div class="rules-title"><i class="fas fa-info-circle"></i> <span id="rules-title">Règles : Snort</span></div>
+                    <div class="rules-text" id="rules-text"></div>
+                </div>
+
+                <div class="board-wrapper">
+                    <div id="game-board"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentGame = 'snort';
+        let boardState = [];
+        let boardSize = 5;
+        let currentPlayer = 1;
+        let selectedCell = null;
+        let isGameOver = false;
+        let gameMode = 'ia'; // ia or pvp
+        let possibleMoves = [];
+
+        const SNORT_RULES = `
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>Jeu :</strong> Placez un pion chacun votre tour.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>Interdit :</strong> Poser un pion à côté d'un pion d'une autre couleur.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>But :</strong> Si l'adversaire ne peut plus poser de pion, vous gagnez.</span></div>
+        `;
+
+        const DODGEM_RULES = `
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>J1 (Bleu) :</strong> Se déplace N, E, S. Sortez par le bord <strong>DROIT</strong>.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>J2 (Rouge) :</strong> Se déplace N, O, E. Sortez par le bord <strong>HAUT</strong>.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>Sortie :</strong> Pour sortir, <strong>re-cliquez sur votre pion</strong> lorsqu'il est sur le bord de sortie.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>But :</strong> Sortez vos pions ou bloquez l'adversaire.</span></div>
+        `;
+
+        const REINES_RULES = `
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>Unités :</strong> Pions (H/V), Reines (Toutes directions). Pas de saut par dessus.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>Captures :</strong> Formez un rectangle entre votre Reine et votre pion déplacé.</span></div>
+            <div class="rules-item"><span class="rules-dot">•</span><span><strong>Condition :</strong> Gagnez quand l'adversaire n'a plus que 2 pions.</span></div>
+        `;
+
+        function switchGame(game) {
+            currentGame = game;
+            document.querySelectorAll('.game-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${game}`).classList.add('active');
+            
+            const sizeSelect = document.getElementById('board-size-select');
+            const modeSelect = document.getElementById('game-mode-select');
+            
+            if(game === 'snort') {
+                boardSize = 6;
+                document.getElementById('size-setting').style.display = "none";
+                document.getElementById('mode-setting').style.display = "flex";
+                document.getElementById('rules-title').innerText = "Règles : Snort";
+                document.getElementById('rules-text').innerHTML = SNORT_RULES;
+            } else if(game === 'dodgem') {
+                boardSize = 3;
+                document.getElementById('size-setting').style.display = "none";
+                document.getElementById('mode-setting').style.display = "flex";
+                document.getElementById('rules-title').innerText = "Règles : Dodgem";
+                document.getElementById('rules-text').innerHTML = DODGEM_RULES;
+            } else {
+                boardSize = 6;
+                sizeSelect.value = "6";
+                document.getElementById('size-setting').style.display = "flex";
+                document.getElementById('mode-setting').style.display = "flex";
+                document.getElementById('rules-title').innerText = "Règles : Le Jeu des Reines";
+                document.getElementById('rules-text').innerHTML = REINES_RULES;
+            }
+            
+            resetGame();
+        }
+
+        function updateBoardSize(val) {
+            boardSize = parseInt(val);
+            resetGame();
+        }
+
+        function updateGameMode(val) {
+            gameMode = val;
+            resetGame();
+        }
+
+        function resetGame() {
+            isGameOver = false;
+            currentPlayer = 1;
+            selectedCell = null;
+            possibleMoves = [];
+            initBoard();
+            renderBoard();
+            updateTurnUI();
+        }
+
+        function initBoard() {
+            boardState = [];
+            for (let i = 0; i < boardSize; i++) {
+                boardState[i] = Array(boardSize).fill(0);
+            }
+
+            if (currentGame === 'dodgem') {
+                for(let j=0; j<boardSize; j++) boardState[j] = Array(boardSize).fill(0);
+                for(let i=0; i<boardSize-1; i++) boardState[0][i] = 3; // P2 (Left) -> ID 3 is p2-pawn (Red)
+                for(let i=1; i<boardSize; i++) boardState[i][boardSize-1] = 1; // P1 (Bottom) -> ID 1 is p1-pawn (Blue)
+            }
+
+            if (currentGame === 'reines') {
+                let n = boardSize;
+                for(let x=0; x<n/2; x++) for(let y=n/2; y<n; y++) boardState[x][y] = 3;
+                for(let x=n/2; x<n-1; x++) for(let y=0; y<n/2; y++) boardState[x][y] = 1;
+                boardState[n-1][0] = 2;
+                for(let y=1; y<n/2; y++) boardState[n-1][y] = 1;
+                boardState[0][n-1] = 4;
+            }
+        }
+
+        function renderBoard() {
+            const boardEl = document.getElementById('game-board');
+            boardEl.style.gridTemplateColumns = `repeat(${boardSize}, 60px)`;
+            boardEl.innerHTML = '';
+
+            for (let y = 0; y < boardSize; y++) {
+                for (let x = 0; x < boardSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    if (selectedCell && selectedCell.x === x && selectedCell.y === y) cell.classList.add('selected');
+                    
+                    const isPossible = possibleMoves.some(m => m.nx === x && m.ny === y);
+                    if (isPossible) cell.classList.add('possible-move');
+
+                    const val = boardState[x][y];
+                    if (val !== 0) {
+                        const piece = document.createElement('div');
+                        piece.className = 'piece ' + getPieceClass(val);
+                        cell.appendChild(piece);
+                    }
+                    cell.onclick = () => handleCellClick(x, y);
+                    boardEl.appendChild(cell);
+                }
+            }
+        }
+
+        function getPieceClass(val) {
+            if (val === 1) return 'p1-pawn';
+            if (val === 2) return 'p1-queen';
+            if (val === 3) return 'p2-pawn';
+            if (val === 4) return 'p2-queen';
+        }
+
+        function handleCellClick(x, y) {
+            if (isGameOver) return;
+            if (currentGame === 'snort') { handleSnortClick(x, y); }
+            else if (currentGame === 'dodgem') { handleDodgemClick(x, y); }
+            else if (currentGame === 'reines') { handleReinesClick(x, y); }
+            renderBoard();
+        }
+
+        // --- SNORT ---
+        function handleSnortClick(x, y) {
+            if (gameMode === 'ia' && currentPlayer === 2) return;
+            if (boardState[x][y] === 0 && canPlaceSnort(x, y, currentPlayer)) {
+                boardState[x][y] = currentPlayer === 1 ? 1 : 3;
+                if (checkSnortWin()) return;
+                nextTurn();
+                if (gameMode === 'ia') setTimeout(iaTurnSnort, 500);
+            }
+        }
+
+        function canPlaceSnort(x, y, player) {
+            const opp = player === 1 ? 3 : 1;
+            const ds = [[1,0], [-1,0], [0,1], [0,-1]];
+            for(let d of ds) {
+                let nx = x + d[0], ny = y + d[1];
+                if(nx >= 0 && nx < boardSize && ny >= 0 && ny < boardSize && boardState[nx][ny] === opp) return false;
+            }
+            return true;
+        }
+
+        function checkSnortWin() {
+            let nextP = currentPlayer === 1 ? 2 : 1;
+            let can = false;
+            for(let i=0; i<boardSize; i++) for(let j=0; j<boardSize; j++) if(boardState[i][j] === 0 && canPlaceSnort(i, j, nextP)) can = true;
+            if(!can) { endGame(currentPlayer); return true; }
+            return false;
+        }
+
+        function iaTurnSnort() {
+            let moves = [];
+            for(let i=0; i<boardSize; i++) for(let j=0; j<boardSize; j++) if(boardState[i][j]===0 && canPlaceSnort(i, j, 2)) moves.push({x:i,y:j});
+            if(moves.length > 0) {
+                let m = moves[Math.floor(Math.random()*moves.length)];
+                boardState[m.x][m.y] = 3;
+                if(!checkSnortWin()) nextTurn();
+                renderBoard();
+            }
+        }
+
+        // --- DODGEM ---
+        function handleDodgemClick(x, y) {
+            if (gameMode === 'ia' && currentPlayer === 2) return;
+            const pId = currentPlayer === 1 ? 1 : 3;
+            const val = boardState[x][y];
+
+            if (selectedCell) {
+                let {x: ax, y: ay} = selectedCell;
+                if (ax === x && ay === y) { // Exit board
+                    if ((currentPlayer === 1 && ax === boardSize - 1) || (currentPlayer === 2 && ay === 0)) {
+                        boardState[ax][ay] = 0;
+                        selectedCell = null;
+                        possibleMoves = [];
+                        if (checkDodgemWin()) return;
+                        nextTurn();
+                        if (gameMode === 'ia') setTimeout(iaTurnDodgem, 500);
+                        return;
+                    }
+                }
+                if (isDodgemMoveValid(ax, ay, x, y, currentPlayer)) {
+                    boardState[x][y] = boardState[ax][ay];
+                    boardState[ax][ay] = 0;
+                    selectedCell = null;
+                    possibleMoves = [];
+                    if (checkDodgemWin()) return;
+                    nextTurn();
+                    if (gameMode === 'ia') setTimeout(iaTurnDodgem, 500);
+                } else if (val === pId) { selectDodgemPiece(x, y); }
+                else { selectedCell = null; possibleMoves = []; }
+            } else if (val === pId) { selectDodgemPiece(x, y); }
+        }
+
+        function selectDodgemPiece(x, y) {
+            selectedCell = {x, y};
+            possibleMoves = [];
+            [[1,0], [-1,0], [0,1], [0,-1]].forEach(([dx, dy]) => {
+                if (isDodgemMoveValid(x, y, x + dx, y + dy, currentPlayer)) possibleMoves.push({nx: x+dx, ny: y+dy});
+            });
+            if ((currentPlayer === 1 && x === boardSize - 1) || (currentPlayer === 2 && y === 0)) possibleMoves.push({nx: x, ny: y});
+        }
+
+        function isDodgemMoveValid(ax, ay, nx, ny, p) {
+            if (nx < 0 || nx >= boardSize || ny < 0 || ny >= boardSize) return false;
+            if (boardState[nx][ny] !== 0) return false;
+            if (Math.abs(nx - ax) + Math.abs(ny - ay) !== 1) return false;
+            if (p === 1 && (nx - ax) === -1) return false; // J1: No West
+            if (p === 2 && (ny - ay) === 1) return false; // J2: No South
+            return true;
+        }
+
+        function checkDodgemWin() {
+            let p1 = 0, p2 = 0;
+            for(let x=0; x<boardSize; x++) for(let y=0; y<boardSize; y++) {
+                if(boardState[x][y] === 1) p1++;
+                if(boardState[x][y] === 3) p2++;
+            }
+            if (p1 === 0) { endGame(1); return true; }
+            if (p2 === 0) { endGame(2); return true; }
+            
+            let nextPlayer = currentPlayer === 1 ? 2 : 1;
+            let nextPId = nextPlayer === 1 ? 1 : 3;
+            let can = false;
+            for(let x=0; x<boardSize; x++) for(let y=0; y<boardSize; y++) {
+                if(boardState[x][y] === nextPId) {
+                    if ((nextPlayer === 1 && x === boardSize - 1) || (nextPlayer === 2 && y === 0)) can = true;
+                    [[1,0], [-1,0], [0,1], [0,-1]].forEach(([dx, dy]) => {
+                        if(isDodgemMoveValid(x,y,x+dx,y+dy, nextPlayer)) can = true;
+                    });
+                }
+            }
+            if (!can) { endGame(currentPlayer); return true; }
+            return false;
+        }
+
+        function iaTurnDodgem() {
+            let moves = [];
+            for(let x=0; x<boardSize; x++) {
+                for(let y=0; y<boardSize; y++) {
+                    if(boardState[x][y] === 3) {
+                        if (y === 0) moves.push({ax:x, ay:y, exit:true});
+                        [[1,0], [-1,0], [0,1], [0,-1]].forEach(([dx, dy]) => {
+                            if(isDodgemMoveValid(x,y,x+dx,y+dy, 2)) moves.push({ax:x, ay:y, nx:x+dx, ny:y+dy});
+                        });
+                    }
+                }
+            }
+            if(moves.length > 0) {
+                let m = moves[Math.floor(Math.random()*moves.length)];
+                if (m.exit) boardState[m.ax][m.ay] = 0;
+                else { boardState[m.nx][m.ny] = 3; boardState[m.ax][m.ay] = 0; }
+                if(!checkDodgemWin()) nextTurn();
+                renderBoard();
+            }
+        }
+
+        // --- REINES ---
+        function handleReinesClick(x, y) {
+            if (gameMode === 'ia' && currentPlayer === 2) return;
+            const pId = currentPlayer;
+            const myTokens = pId === 1 ? [1, 2] : [3, 4];
+            const val = boardState[x][y];
+
+            if (selectedCell) {
+                let {x: ax, y: ay} = selectedCell;
+                let isQ = boardState[ax][ay] === (pId === 1 ? 2 : 4);
+                if (canReinesMove(ax, ay, x, y, isQ)) {
+                    boardState[x][y] = boardState[ax][ay];
+                    boardState[ax][ay] = 0;
+                    let q = findQueen(pId);
+                    captureReines(q.x, q.y, x, y, pId);
+                    selectedCell = null;
+                    possibleMoves = [];
+                    if (checkReinesWin()) return;
+                    nextTurn();
+                    if (gameMode === 'ia') setTimeout(iaTurnReines, 600);
+                } else if (myTokens.includes(val)) { selectReinesPiece(x, y, pId); }
+                else { selectedCell = null; possibleMoves = []; }
+            } else if (myTokens.includes(val)) { selectReinesPiece(x, y, pId); }
+        }
+
+        function selectReinesPiece(x, y, p) {
+            selectedCell = {x, y};
+            possibleMoves = [];
+            let isQ = boardState[x][y] === (p === 1 ? 2 : 4);
+            for(let nx=0; nx<boardSize; nx++) {
+                for(let ny=0; ny<boardSize; ny++) {
+                    if (canReinesMove(x, y, nx, ny, isQ)) possibleMoves.push({nx, ny});
+                }
+            }
+        }
+
+        function canReinesMove(ax, ay, nx, ny, isQ) {
+            if (nx < 0 || nx >= boardSize || ny < 0 || ny >= boardSize || boardState[nx][ny] !== 0) return false;
+            let dx = nx - ax, dy = ny - ay;
+            if (dx === 0 && dy === 0) return false;
+            if (isQ) { if (Math.abs(dx) !== Math.abs(dy) && dx !== 0 && dy !== 0) return false; }
+            else { if (dx !== 0 && dy !== 0) return false; }
+            let sx = dx === 0 ? 0 : dx / Math.abs(dx), sy = dy === 0 ? 0 : dy / Math.abs(dy);
+            let tx = ax + sx, ty = ay + sy;
+            while (tx !== nx || ty !== ny) { if (boardState[tx][ty] !== 0) return false; tx += sx; ty += sy; }
+            return true;
+        }
+
+        function captureReines(qx, qy, px, py, player) {
+            let minX = Math.min(qx, px), maxX = Math.max(qx, px);
+            let minY = Math.min(qy, py), maxY = Math.max(qy, py);
+            let adversary = player === 1 ? 3 : 1;
+            [[minX, minY], [minX, maxY], [maxX, minY], [maxX, maxY]].forEach(([cx, cy]) => {
+                if (boardState[cx][cy] === adversary) boardState[cx][cy] = 0;
+            });
+        }
+
+        function findQueen(p) {
+            let target = p === 1 ? 2 : 4;
+            for(let i=0; i<boardSize; i++) for(let j=0; j<boardSize; j++) if(boardState[i][j] === target) return {x:i, y:j};
+        }
+
+        function iaTurnReines() {
+            let moves = [];
+            let myTokens = [3, 4];
+            for(let x=0; x<boardSize; x++) for(let y=0; y<boardSize; y++) if (myTokens.includes(boardState[x][y])) {
+                let isQ = boardState[x][y] === 4;
+                for(let nx=0; nx<boardSize; nx++) for(let ny=0; ny<boardSize; ny++) if (canReinesMove(x, y, nx, ny, isQ)) moves.push({ax:x, ay:y, nx, ny, v: boardState[x][y]});
+            }
+            if (moves.length > 0) {
+                let m = moves[Math.floor(Math.random() * moves.length)];
+                boardState[m.nx][m.ny] = m.v; boardState[m.ax][m.ay] = 0;
+                let q = findQueen(2); captureReines(q.x, q.y, m.nx, m.ny, 2);
+            }
+            if(!checkReinesWin()) nextTurn();
+            renderBoard();
+        }
+
+        function checkReinesWin() {
+            let p1 = 0, p2 = 0;
+            for(let r of boardState) for(let v of r) { if(v === 1 || v === 2) p1++; if(v === 3 || v === 4) p2++; }
+            if (p2 <= 2) { endGame(1); return true; }
+            if (p1 <= 2) { endGame(2); return true; }
+            return false;
+        }
+
+        function nextTurn() { currentPlayer = currentPlayer === 1 ? 2 : 1; updateTurnUI(); }
+        function updateTurnUI() {
+            const dot = document.querySelector('.turn-dot');
+            dot.className = 'turn-dot ' + (currentPlayer === 1 ? 'dot-player1' : 'dot-player2');
+            document.getElementById('player-name').innerText = 'Joueur ' + currentPlayer + (gameMode === 'ia' && currentPlayer === 2 ? ' (IA)' : '');
+        }
+        function endGame(winner) { isGameOver = true; document.getElementById('player-name').innerText = 'Victoire du Joueur ' + winner + ' !'; }
+
+        switchGame('snort');
+    </script>
+</body>
+</html>

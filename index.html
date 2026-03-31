@@ -26,10 +26,10 @@
                 <a href="#contact"  class="nav-link">Contact</a>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
-                    <span class="theme-icon" id="themeIcon">🌙</span>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème" title="Changer le thème">
+                    <span class="theme-icon" id="themeIcon" aria-hidden="true">🌙</span>
                 </button>
-                <button class="hamburger" id="hamburger" aria-label="Menu">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -70,8 +70,8 @@
                         Découvrir mes projets
                         <i class="fas fa-arrow-down btn-icon"></i>
                     </a>
-                    <a href="https://github.com/Robilol2411" target="_blank" rel="noopener" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> GitHub
+                    <a href="https://github.com/Robilol2411" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Voir mon profil GitHub">
+                        <i class="fab fa-github" aria-hidden="true"></i> GitHub
                     </a>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                             <span class="dot dot-yellow"></span>
                             <span class="dot dot-yellow-alt"></span>
                         </div>
-                        <span class="code-filename"><i class="fab fa-js-square"></i> portfolio.js</span>
+                        <span class="code-filename"><i class="fab fa-js-square" aria-hidden="true"></i> portfolio.js</span>
                     </div>
                     <div class="code-body">
 <pre><code><span class="c-kw">const</span> <span class="c-var">developer</span> = {
@@ -95,13 +95,13 @@
 };</code></pre>
                     </div>
                 </div>
-                <div class="floating-badge badge-js fade-up d4">
+                <div class="floating-badge badge-js fade-up d4" aria-hidden="true">
                     <i class="fab fa-js-square"></i> JS
                 </div>
-                <div class="floating-badge badge-python fade-up d5">
+                <div class="floating-badge badge-python fade-up d5" aria-hidden="true">
                     <i class="fab fa-python"></i> Python
                 </div>
-                <div class="floating-badge badge-godot fade-up d4">
+                <div class="floating-badge badge-godot fade-up d4" aria-hidden="true">
                     🎮 Godot
                 </div>
             </div>
@@ -139,13 +139,13 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-label">02. COMPÉTENCES</span>
-                <h2 class="section-title">Mon <span class="accent">expertises</span></h2>
+                <h2 class="section-title">Mon <span class="accent">expertise</span></h2>
                 <div class="section-line"></div>
             </div>
             <div class="skills-container reveal">
                 <div class="skill-group">
                     <div class="skill-group-header">
-                        <i class="fas fa-code skill-group-icon"></i>
+                        <i class="fas fa-code skill-group-icon" aria-hidden="true"></i>
                         <h3>Langages Maîtrisés</h3>
                     </div>
                     <div class="skill-tags">
@@ -173,49 +173,49 @@
             </div>
 
             <div class="timeline">
-                <!-- Item 1 (Left) -->
+                <!-- Item 1 (Left) - Airbnb (First project, at top) -->
                 <div class="timeline-item timeline-item-left reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">MARS 2024</div>
+                    <div class="timeline-date">SEPTEMBRE 2024</div>
                     <div class="timeline-content">
-                        <h3>CINEMAX</h3>
-                        <p>Lancement de la plateforme interactive de catalogue de films inspirée de Netflix. Utilisation intensive de TMDB API et PHP.</p>
+                        <h3>AIRBNB CLONE</h3>
+                        <p>Mon tout premier projet ! Réplication de l'interface Airbnb pour apprendre les bases du positionnement, du flexbox et du design responsive.</p>
                         <div class="timeline-tags">
-                            <span class="tech-pill">PHP</span>
-                            <span class="tech-pill">JS</span>
-                            <span class="tech-pill">API</span>
+                            <span class="tech-pill">HTML5</span>
+                            <span class="tech-pill">CSS3</span>
                         </div>
-                        <a href="projects.html" class="project-cta-link">Détails <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://robilol2411.github.io/site-airbnb-L1/" target="_blank" class="project-cta-link">Démo <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
-                <!-- Item 2 (Right) -->
+                <!-- Item 2 (Right) - Python Games -->
                 <div class="timeline-item timeline-item-right reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">FÉVRIER 2024</div>
+                    <div class="timeline-date">OCTOBRE 2024</div>
                     <div class="timeline-content">
-                        <h3>Game Dev Explorer</h3>
-                        <p>Développement de prototypes de mini-jeux avec Godot Engine pour explorer les mécaniques physiques et l'IA simple.</p>
+                        <h3>PYTHON MINI-GAMES</h3>
+                        <p>Développement de deux jeux de plateau classiques (Snort & Dodgem) en Python. Exploration de la logique de jeu et de l'interaction console.</p>
                         <div class="timeline-tags">
-                            <span class="tech-pill">Godot</span>
-                            <span class="tech-pill">GDScript</span>
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Logic</span>
                         </div>
-                        <a href="projects.html" class="project-cta-link">Détails <i class="fas fa-arrow-right"></i></a>
+                        <a href="games.html" class="project-cta-link">Jouer en ligne <i class="fas fa-play-circle" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
-                <!-- Item 3 (Left) -->
+                <!-- Item 3 (Left) - Jeu des Reines -->
                 <div class="timeline-item timeline-item-left reveal">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">JANVIER 2024</div>
+                    <div class="timeline-date">NOVEMBRE 2024</div>
                     <div class="timeline-content">
-                        <h3>Cyber Security Lab</h3>
-                        <p>Mise en place d'un environnement de test pour l'analyse de vulnérabilités et la compréhension des protocoles réseau.</p>
+                        <h3>LE JEU DES REINES</h3>
+                        <p>Projet avancé en Python incluant une intelligence artificielle et des mécaniques de capture complexes. Un défi stratégique complet.</p>
                         <div class="timeline-tags">
                             <span class="tech-pill">Python</span>
-                            <span class="tech-pill">Linux</span>
+                            <span class="tech-pill">IA</span>
+                            <span class="tech-pill">Algorithmique</span>
                         </div>
-                        <a href="about.html" class="project-cta-link">À propos <i class="fas fa-arrow-right"></i></a>
+                        <a href="games.html" class="project-cta-link">Jouer en ligne <i class="fas fa-play-circle" aria-hidden="true"></i></a>
                     </div>
                 </div>
 

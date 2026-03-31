@@ -24,10 +24,10 @@
                 <a href="index.html#contact"  class="nav-link">Contact</a>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
-                    <span class="theme-icon" id="themeIcon">🌙</span>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème" title="Changer le thème">
+                    <span class="theme-icon" id="themeIcon" aria-hidden="true">🌙</span>
                 </button>
-                <button class="hamburger" id="hamburger" aria-label="Menu">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -45,34 +45,90 @@
     <section id="projects" class="section">
         <div class="container">
             <div class="projects-grid">
-                <!-- CINEMAX -->
+                <!-- AIRBNB -->
                 <article class="project-card reveal">
                     <div class="project-glow-layer"></div>
                     <div class="project-card-content">
                         <div class="project-top">
-                            <div class="project-emoji">🎬</div>
+                            <div class="project-emoji">🏠</div>
                             <div class="project-actions">
-                                <a href="https://github.com/Robilol2411/netflix-php-L1" target="_blank" rel="noopener" class="project-icon-btn">
+                                <a href="https://github.com/Robilol2411/site-airbnb-L1" target="_blank" rel="noopener" class="project-icon-btn" aria-label="GitHub Repository">
                                     <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://robilol2411.github.io/site-airbnb-L1/" target="_blank" rel="noopener" class="project-icon-btn project-icon-btn-live" aria-label="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </div>
                         </div>
-                        <h3 class="project-name">CINEMAX</h3>
+                        <h3 class="project-name">Airbnb Clone</h3>
                         <p class="project-desc">
-                            Catalogue de films interactif inspire de Netflix. TMDB API + PHP + JS.
+                            Mon tout premier projet web ! Un clone de l'interface Airbnb réalisé uniquement en HTML5 et CSS3 pour maîtriser le Flexbox et le Responsive Design.
                         </p>
                         <div class="project-tech-list">
-                            <span class="tech-pill">JS</span>
-                            <span class="tech-pill">PHP</span>
-                            <span class="tech-pill">TMDB API</span>
+                            <span class="tech-pill">HTML5</span>
+                            <span class="tech-pill">CSS3</span>
+                            <span class="tech-pill">Responsive</span>
                         </div>
-                        <a href="https://github.com/Robilol2411/netflix-php-L1" target="_blank" rel="noopener" class="project-cta-link">
-                            Explorer <i class="fas fa-arrow-right"></i>
+                        <a href="https://robilol2411.github.io/site-airbnb-L1/" target="_blank" rel="noopener" class="project-cta-link">
+                            Voir le site <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
 
-                <article class="project-card project-soon reveal reveal-delay">
+                <!-- PYTHON GAMES -->
+                <article class="project-card reveal reveal-delay">
+                    <div class="project-glow-layer" style="background: linear-gradient(to right, #3776ab, #ffde57);"></div>
+                    <div class="project-card-content">
+                        <div class="project-top">
+                            <div class="project-emoji">🐍</div>
+                            <div class="project-actions">
+                                <a href="games.html" class="project-icon-btn project-icon-btn-live" aria-label="Play Games">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-name">Python Classic Games</h3>
+                        <p class="project-desc">
+                            Une collection de deux jeux de plateau (Snort & Dodgem). Logic console et conditions de victoire.
+                        </p>
+                        <div class="project-tech-list">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Logic</span>
+                        </div>
+                        <a href="games.html" class="project-cta-link">
+                            Jouer sur le site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- JEU DES REINES -->
+                <article class="project-card reveal reveal-delay2">
+                    <div class="project-glow-layer" style="background: linear-gradient(to right, #ff9a9e, #fad0c4);"></div>
+                    <div class="project-card-content">
+                        <div class="project-top">
+                            <div class="project-emoji">👑</div>
+                            <div class="project-actions">
+                                <a href="games.html" class="project-icon-btn project-icon-btn-live" aria-label="Play Reines">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-name">Le Jeu des Reines</h3>
+                        <p class="project-desc">
+                            Projet avancé de stratégie avec IA intégrée. Capture de pions par encerclement et mouvements de reines complexes.
+                        </p>
+                        <div class="project-tech-list">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">IA</span>
+                            <span class="tech-pill">Algorithmes</span>
+                        </div>
+                        <a href="games.html" class="project-cta-link">
+                            Défier l'IA <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card project-soon reveal reveal-delay3">
                     <div class="project-card-content">
                         <div class="soon-content">
                             <div class="soon-icon"><i class="fas fa-plus"></i></div>
