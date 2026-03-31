@@ -22,8 +22,8 @@
             <div class="nav-links" id="navLinks">
                 <a href="#about"    class="nav-link">À propos</a>
                 <a href="#skills"   class="nav-link">Compétences</a>
-                <a href="#projects" class="nav-link">Projets</a>
-                <a href="#contact"  class="nav-link">Contact</a>
+                <a href="#projects" class="nav-link">Parcours</a>
+                <a href="#contact"  class="nav-link">GitHub</a>
             </div>
             <div class="nav-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème" title="Changer le thème">
@@ -119,16 +119,56 @@
             <div class="about-grid">
                 <div class="about-text reveal">
                     <p class="about-p">
-                        Passionné par l'informatique depuis toujours, je combine mes études avec des projets personnels créatifs. Mon parcours est guidé par la curiosité et l'envie de comprendre les systèmes complexes.
+                        Salut ! Je suis <strong>Robin Matelot</strong>, étudiant en informatique passionné par la création et le développement. Toujours curieux, je cherche constamment à apprendre de nouvelles technologies et à relever de nouveaux défis.
                     </p>
-                    <a href="about.html" class="btn btn-secondary btn-sm">
-                        En savoir plus <i class="fas fa-plus"></i>
-                    </a>
+                    <p class="about-p">
+                        Je m'oriente vers trois domaines qui me fascinent : la <span class="hl-yellow">Data Science</span>, la <span class="hl-yellow">Cybersécurité</span>, et l_<span class="hl-yellow">Intelligence Artificielle</span>. Dans mon temps libre, j'aime coder des mini-jeux et explorer des idées créatives.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item"><span class="stat-num yellow">10+</span><span class="stat-lbl">Techs</span></div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item"><span class="stat-num yellow">🎮</span><span class="stat-lbl">Game Dev</span></div>
+                    </div>
                 </div>
-                <div class="about-stats reveal reveal-right">
-                    <div class="stat-item"><span class="stat-num yellow">10+</span><span class="stat-lbl">Techs</span></div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item"><span class="stat-num yellow">🎮</span><span class="stat-lbl">Game Dev</span></div>
+                <div class="about-cards reveal reveal-right">
+                    <div class="interest-grid">
+                        <div class="interest-card">
+                            <div class="interest-icon yellow-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="interest-info">
+                                <span class="interest-name">Data Science</span>
+                                <span class="interest-sub">Analyse & Modélisation</span>
+                            </div>
+                        </div>
+                        <div class="interest-card">
+                            <div class="interest-icon yellow-icon">
+                                <i class="fas fa-shield-halved"></i>
+                            </div>
+                            <div class="interest-info">
+                                <span class="interest-name">Cybersécurité</span>
+                                <span class="interest-sub">Ethical hacking</span>
+                            </div>
+                        </div>
+                        <div class="interest-card">
+                            <div class="interest-icon yellow-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="interest-info">
+                                <span class="interest-name">IA</span>
+                                <span class="interest-sub">Deep Learning</span>
+                            </div>
+                        </div>
+                        <div class="interest-card">
+                            <div class="interest-icon yellow-icon" aria-hidden="true">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="interest-info">
+                                <span class="interest-name">Game Dev</span>
+                                <span class="interest-sub">Créativité</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,21 +183,43 @@
                 <div class="section-line"></div>
             </div>
             <div class="skills-container reveal">
-                <div class="skill-group">
+                <div class="skill-group reveal">
                     <div class="skill-group-header">
                         <i class="fas fa-code skill-group-icon" aria-hidden="true"></i>
-                        <h3>Langages Maîtrisés</h3>
+                        <h3>Langages</h3>
                     </div>
                     <div class="skill-tags">
                         <div class="skill-tag">JavaScript</div>
                         <div class="skill-tag">Python</div>
                         <div class="skill-tag">Java</div>
                         <div class="skill-tag">PHP</div>
-                        <div class="skill-tag">React</div>
+                        <div class="skill-tag">C/C++</div>
+                        <div class="skill-tag">SQL</div>
                     </div>
-                    <a href="skills.html" class="btn btn-secondary btn-sm" style="margin-top: 2rem;">
-                        Voir tout le stack <i class="fas fa-arrow-right"></i>
-                    </a>
+                </div>
+
+                <div class="skill-group reveal reveal-delay">
+                    <div class="skill-group-header">
+                        <i class="fas fa-layer-group skill-group-icon"></i>
+                        <h3>Frameworks</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag tag-accent">React</div>
+                        <div class="skill-tag tag-accent">Symfony</div>
+                        <div class="skill-tag tag-accent">Godot</div>
+                    </div>
+                </div>
+
+                <div class="skill-group reveal reveal-delay2">
+                    <div class="skill-group-header">
+                        <i class="fas fa-rocket skill-group-icon"></i>
+                        <h3>Domaines Clés</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag tag-yellow-alt">Data Science</div>
+                        <div class="skill-tag tag-yellow-alt">Cybersécurité</div>
+                        <div class="skill-tag tag-yellow-alt">IA / ML</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,9 +300,18 @@
                 <div class="section-line"></div>
             </div>
             <div class="contact-wrapper reveal">
-                <p class="contact-intro">N'hésite pas à me contacter ou à suivre mes travaux sur GitHub.</p>
-                <div class="contact-cta">
-                    <a href="contact.html" class="btn btn-primary btn-lg">Me contacter</a>
+                <p class="contact-intro">N'hésite pas à me retrouver sur GitHub pour voir mes derniers travaux !</p>
+                <div class="contact-cards" style="margin-top: 2rem; display: flex; justify-content: center;">
+                    <a href="https://github.com/Robilol2411" target="_blank" rel="noopener" class="contact-card" style="max-width: 400px; width: 100%;">
+                        <div class="contact-card-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-card-info">
+                            <span class="contact-card-title">GitHub</span>
+                            <span class="contact-card-sub">@Robilol2411</span>
+                        </div>
+                        <i class="fas fa-arrow-up-right-from-square contact-card-arrow"></i>
+                    </a>
                 </div>
             </div>
         </div>
